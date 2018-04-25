@@ -31,10 +31,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		   @foreach($products as $product)	
 
 			<li id="1">
-				<img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$category->name}}" />
+				<a href="{{url('view_detail/'.$product->id)}}"><img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$category->name}}" /></a>
 				
 				<br clear="all" />
-				<div><a href="#">{{$product->name}}</a><br><br>
+				<div><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a><br><br>
 					<p>{{number_format($product->price)}} VND</p><br>	
 					<p><strong style="background-color: green; color:white; border-radius: 5px;padding:0 2px;">{{$product->quality}}<i class="fa fa-star"></i></strong></p> 
                      

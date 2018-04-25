@@ -12,5 +12,10 @@ class Technology extends Model
     protected $fillable=['screen','system','cpu	','ram','rom','memory','pin','product_id'];
 
 
-
+  
+   public function product()
+   {
+   	  return $this->belongsTo('App/Product');
+   }
+   
 }

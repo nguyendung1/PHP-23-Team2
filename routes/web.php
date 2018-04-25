@@ -44,6 +44,9 @@
  Route::get('10_den_15_trieu','ProductsController@MuoiDen15Trieu');
  Route::get('tren_15_trieu','ProductsController@Tren15Trieu');
  
+ //view detail
+
+ Route::get('view_detail/{id}','ProductsController@view_detail');
 
 
 
