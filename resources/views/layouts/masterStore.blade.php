@@ -17,7 +17,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<link rel="stylesheet" href="{{asset('web/styles/jqzoom.css')}}" type="text/css">
 		<script type="text/javascript" src="web/js/jquery-1.3.2.js"></script>
 		<script type="text/javascript" src="web/js/jquery.livequery.js"></script>
-         <link rel="shortcut icon" type="text/css" href="web/images/slide/icon/mobilestore.jpg">
+         <link rel="shortcut icon" type="text/css" href="{{asset('web/images/slide/icon/mobilestore.jpg')}}">
 		<!-- boostrap-->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -56,21 +56,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!----start-Header---->
 		<div class="header">
 			<div class="search-bar">
-				<form>
-					<input type="text"><input type="submit" value="Search" />
+				<form action="{{url('search')}}" method="get">
+					<input type="text" name="search" placeholder="Nhập tên Sản Phẩm..">
+					
+					<input type="submit" value="Search" />
 				</form>
 			</div>
 			<div class="clear"> </div>
 			<div class="header-top-nav">
-				<ul>
-					     <li><a href="index.html">Trang Chủ</a></li>
-				         <li><a href="about.html">Giới Thiệu</a></li>
-				         <li><a href="store.html">Store</a></li>
-				         <li><a href="store.html">Đặc Trưng</a></li>
-				         <li><a href="blog.html">Blog</a></li>
-			             <li><a href="contact.html">Liên Hệ</a></li>
+			  <ul>	
 
-				</ul>
+					<li><a href="#">Đăng Kí</a></li>
+					<li><a href="#">Đăng Nhập</a></li>
+					<li><a href="#">Phát Triển</a></li>
+					<li><a href="#">Thanh Toán</a></li>
+					<li><a href="#">Tài Khoản Của Tôi</a></li>
+					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
+				
+               </ul>
 			</div>
 			<div class="clear"> </div>
 		</div>
@@ -80,18 +83,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="wrap">
 		<!----start-logo---->
 			<div class="logo">
-				<a href="index.html"><img src="{{asset('web/images/slide/logo.png')}}" title="logo" /></a>
+				<a href="{{url('/')}}"><img src="{{asset('web/images/slide/logo.png')}}" title="logo" /></a>
 			</div>
 		<!----end-logo---->
 		<!----start-top-nav---->
 		<div class="top-nav">
 			<ul>
-				 <li><a href="index.html">Trang Chủ</a></li>
-				<li><a href="about.html">Giới Thiệu</a></li>
-				<li><a href="store.html">Store</a></li>
-				<li><a href="store.html">Đặc Trưng</a></li>
-				<li><a href="blog.html">Blog</a></li>
-				<li><a href="contact.html">Liên Hệ</a></li>
+				 <li><a href="{{url('index')}}">Trang Chủ</a></li>
+				<li><a href="{{url('about')}}">Giới Thiệu</a></li>
+				
+				<li><a href="#">Đặc Trưng</a></li>
+				<li><a href="{{url('blog')}}">Blog</a></li>
+				<li><a href="{{url('contact')}}">Liên Hệ</a></li>
 			</ul>
 		</div>
 		<div class="clear"> </div>
@@ -130,9 +133,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<input type="text"><input type="submit" value="go" />
 					<h3>Fallow Us:</h3>
 					<ul>
-					 	<li><a href="#"><img src="web/images/slide/twitter.png" title="twitter" />Twitter</a></li>
-					 	<li><a href="#"><img src="web/images/slide/facebook.png" title="Facebook" />Facebook</a></li>
-					 	<li><a href="#"><img src="web/images/slide/rss.png" title="Rss" />Rss</a></li>
+					 	<li><a href="#"><img src="{{asset('web/images/slide/twitter.png')}}" title="twitter" />Twitter</a></li>
+					 	<li><a href="#"><img src="{{asset('web/images/slide/facebook.png')}}" title="Facebook" />Facebook</a></li>
+					 	<li><a href="#"><img src="{{asset('web/images/slide/rss.png')}}" title="Rss" />Rss</a></li>
 					 </ul>
 				</div>
 			</div>
