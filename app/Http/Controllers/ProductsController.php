@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Technology;
 class ProductsController extends Controller
 {
     //show san pham
@@ -140,15 +141,28 @@ class ProductsController extends Controller
         
   }
 
+  // END tim Kiem
 
+  //view details
+ 
 
+   public function view_detail($id)
+   {   
+        
+       $product=Product::find($id);
 
-
-
-
-
+       $category=Category::find($product->category_id);
+      
+       $technology=$product->technology()->first();
+      
+      
+      return view('PageStore.single',compact('product','technology','category'));
   
-   
+    }
+
+
+
+
 
 
 

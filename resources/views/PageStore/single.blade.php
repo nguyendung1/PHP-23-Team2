@@ -9,13 +9,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<head>
 		 <meta charset="utf-8">
 		<title>Mobilestore Website Template | single :: W3layouts</title>
-		<link href="web/styles/style.css" rel="stylesheet" type="text/css"  media="all" />
+		<link href="{{asset('web/styles/style.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
+		<link rel="shortcut icon" type="text/css" href="{{asset('web/images/slide/icon/mobilestore.jpg')}}">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<script src="web/js/jquery-1.3.2.min.js" type="text/javascript"></script>
-		<script src="web/js/jqzoom.pack.1.0.1.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="web/styles/jqzoom.css" type="text/css">
+		<script src="{{asset('web/js/jquery-1.3.2.min.js')}}" type="text/javascript"></script>
+		<script src="{{asset('web/js/jqzoom.pack.1.0.1.js')}}" type="text/javascript"></script>
+		<link rel="stylesheet" href="{{asset('web/styles/jqzoom.css')}}" type="text/css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script type="text/javascript">
 			$(function() {
@@ -51,7 +52,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="clear"> </div>
 			<div class="header-top-nav">
 			   <ul>
-					<li><a href="#">Đăng Kí</a></li>
+						<li><a href="#">Đăng Kí</a></li>
 					<li><a href="#">Đăng Nhập</a></li>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
@@ -67,18 +68,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="wrap">
 		<!----start-logo---->
 			<div class="logo">
-				<a href="index.html"><img src="web/images/slide/logo.png" title="logo" /></a>
+				<a href="{{url('/')}}"><img src="{{asset('web/images/slide/logo.png')}}" title="logo" /></a>
 			</div>
 		<!----end-logo---->
 		<!----start-top-nav---->
 		<div class="top-nav">
 			<ul>
-				 <li><a href="index.html">Trang Chủ</a></li>
-				<li><a href="about.html">Giới Thiệu</a></li>
-				<li><a href="store.html">Sản Phẩm</a></li>
-				<li><a href="store.html">Đặc Trưng</a></li>
-				<li><a href="blog.html">Blog</a></li>
-				<li><a href="contact.html">Liên Hệ</a></li>
+					 <li><a href="{{url('/')}}">Trang Chủ</a></li>
+				<li><a href="{{url('about')}}">Giới Thiệu</a></li>
+				
+				<li><a href="#">Đặc Trưng</a></li>
+				<li><a href="{{url('blog')}}">Blog</a></li>
+				<li><a href="{{url('contact')}}">Liên Hệ</a></li>
 			</ul>
 		</div>
 		<div class="clear"> </div>
@@ -94,40 +95,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    	<div class="details-page">
 		    		<div class="back-links">
 		    			<ul>
-		    				<li><a href="#">Home</a><img src="web/images/slide/arrow.png" alt=""></li>
-		    				<li><a href="#">Product</a><img src="web/images/slide/arrow.png" alt=""></li>
-		    				<li><a href="#">ProductDetail</a><img src="web/images/slide/arrow.png" alt=""></li>
+		    				<li><a href="#">Home</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret image"></li>
+		    				<li><a href="#">Product</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret  image"></li>
+		    				<li><a href="#">ProductDetail</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret  image"></li>
 		    			</ul>
 		    		</div>
 		    	</div>
                        <div class="detalis-image" style="float: left;">
-		    		<div id="content"><a href="web/images/slide/m11.jpg" class="jqzoom" style="" title="Product-Name"> <img class="w3-card-2" src="web/images/slide/m1.jpg" width="350" height="320"  title="Product-Name" style="border: 1px solid #e5e5e5;"> </a>
+		    		<div id="content"><a href="{{asset('web/images/total')}}/{{$product->image}}" class="jqzoom"  title="Product-Name"> <img class="w3-card-2" src="{{asset('web/images/total')}}/{{$product->image}}" 
+		    			width="350" height="320"  title="Product-Name" style="border: 1px solid #e5e5e5;"> </a>
 					</div>
 				</div>
 		    	
 
 		    	
 		    	
-		    	     <div class="detalis-image-details" style="width: 80%;">
+		    	     <div class="detalis-image-details" style="width:80%;">
 		    	 
 		    	
 		    		    <div class="details-categories">
                          
-                            
+                           
 		    			<ul>
-                               <li> <h3>Điện thoại Nokia 8</h3> </li><br>
-		    				<li><h3>Thuộc Hãng:<a  class="active1" href="#"><span>Nokia Mobiles</span></a></h3></li><br>
+                               <li> <h3>{{$product->name}}</h3> </li><br>
+		    				    <li><h3>Thuộc Hãng:<a  class="active1" href="#"><span>{{$category->name}}</span></a></h3></li><br>
 		    				
-		    				<li><h3>Thông Số Kỹ Thuật</h3></li><br>
-		    				<li>Màn Hình :  OLED, 5.8", Super Retina</li><br>
-		    				<li>Hệ Điều Hành : <a class="w3-text-blue" href="#" >iOS 11</a></li><br>
-		    				<li>Camera Sau : 232pixel</li><br>
-		    				<li>Camera trước:	7 MP</li><br>
-		    				<li>CPU:	<a class="w3-text-blue" href="#">Apple A11 Bionic 6 nhân</a></li><br>
-		    				<li>RAM:	3 GB</li><br>
-		    				<li>Bộ nhớ trong:	64 GB</li><br>
-		    				<li>Thẻ SIM:	1 Nano SIM, Hỗ trợ 4G</li><br>
-		    				<li>Dung lượng pin:	2716 mAh, có sạc nhanh</li>
+		    				    <li><h3>Thông Số Kỹ Thuật</h3></li><br>
+		    				    <li>Màn Hình :{{$technology->screen}}</li><br>
+		    				    <li>Hệ Điều Hành : <a class="w3-text-blue" href="#" >{{$technology->system}}</a></li><br>
+		    				    <li>Camera: {{$technology->camera}}</li><br>
+		    				    
+		    				    <li>CPU:{{$technology->cpu}}<a class="w3-text-blue" href="#">Apple A11 Bionic 6 nhân</a></li><br>
+		    				    <li>RAM :  {{$technology->ram}}  GB</li><br>
+		    				    <li>Bộ nhớ trong:{{$technology->rom}}</li><br>
+		    				    <li>Thẻ Nhớ:	{{$technology->memory}}</li><br>
+		    				    <li>Dung lượng pin:	{{$technology->pin}} mAh, có sạc nhanh</li>
 
 		    				
 		    			</ul>
@@ -137,11 +139,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    			<div class="left-value-details">
 			    			<ul style="font-size:120%;">
 			    				<li>Trả góp 0% qua 11 thẻ tín dụng:VP Bank, VIB, TPBank, Techcombank, Sacombank, Maritimebank, HSBC, Citibank, Shinhanbank, Standard Chatered, EximBank.</li>
-			    				<li><h3>Giá Gốc: 2442,223 VND</h3></li>
+			    				<li><h3>Giá Gốc:{{number_format($product->price)}} VND</h3></li>
 			    				<!--<li><span>$350</span></li>-->
 			    				
 			    				<br />
-			    				<li><p>Đánh Giá Người Mua :<strong style="background-color: green; color:white; border-radius: 5px;padding:0 2px;">4.5<i class="fa fa-star"></i></strong></p> </li>
+			    				<li><p>Đánh Giá Người Mua :<strong style="background-color: green; color:white; border-radius: 5px;padding:0 2px;">{{$product->quality}}<i class="fa fa-star"></i></strong></p> </li>
 
 			    			</ul>
 			    			<a href="#">AddCart</a><br><br>
@@ -158,9 +160,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    		</div>
 		    		<div class="share">
 		    			<ul>
-		    				<li> <a href="#"><img src="web/images/slide/facebook.png" title="facebook" /> FaceBook</a></li>
-		    				<li> <a href="#"><img src="web/images/slide/twitter.png" title="Twiiter" />Twiiter</a></li>
-		    				<li> <a href="#"><img src="web/images/slide/rss.png" title="Rss" />Rss</a></li>
+		    				<li> <a href="#"><img src="{{asset('web/images/slide/facebook.png')}}" title="facebook" /> FaceBook</a></li>
+		    				<li> <a href="#"><img src="{{asset('web/images/slide/twitter.png')}}" title="Twiiter" />Twiiter</a></li>
+		    				<li> <a href="#"><img src="{{asset('web/images/slide/rss.png')}}" title="Rss" />Rss</a></li>
 		    			</ul>
 		    		</div>
 		    		<div class="clear"> </div>
@@ -211,9 +213,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<input type="text"><input type="submit" value="go" />
 					<h3>Fallow Us:</h3>
 					 <ul>
-					 	<li><a href="#"><img src="web/images/slide/twitter.png" title="twitter" />Twitter</a></li>
-					 	<li><a href="#"><img src="web/images/slide/facebook.png" title="Facebook" />Facebook</a></li>
-					 	<li><a href="#"><img src="web/images/slide/rss.png" title="Rss" />Rss</a></li>
+					 	<li><a href="#"><img src="{{asset('web/images/slide/twitter.png')}}" title="twitter" />Twitter</a></li>
+					 	<li><a href="#"><img src="{{asset('web/images/slide/facebook.png')}}" title="Facebook" />Facebook</a></li>
+					 	<li><a href="#"><img src="{{asset('web/images/slide/rss.png')}}" title="Rss" />Rss</a></li>
 					 </ul>
 				</div>
 			</div>

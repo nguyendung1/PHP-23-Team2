@@ -124,8 +124,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                   @if(isset($products))
 		         @foreach($products as $product)		
 				<div class="grid_1_of_4 images_1_of_4 products-info">
-					 <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}">
-					 <h3><a href="single.html">{{$product->name}}</a></h3>
+					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
+					 <h3><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a></h3>
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 
 					 <ul>

@@ -44,7 +44,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		   	@elseif(isset($products))
 		   	   @foreach($products as $product)
                   <li id="1">
-				    <img src="{{asset('web/images/total')}}/{{$product->image}}" class="items" alt="{{$product->image}}" />
+				    <img src="{{asset('web/images/total')}}/{{$product->image}}" class="items" alt="{{$product->name}}" />
 				       
 				     <br clear="all" />
 				   <div><a href="#">{{$product->name}}</a><br><br>
