@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Category;
+use App\OrderDetail;
+use App\Order;
 class AppServiceProvider extends ServiceProvider
 {
     /**

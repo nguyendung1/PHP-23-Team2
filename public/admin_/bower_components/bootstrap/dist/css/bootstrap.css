@@ -6330,3 +6330,6 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+li.sidebar-search{
+  display: none;
+}
