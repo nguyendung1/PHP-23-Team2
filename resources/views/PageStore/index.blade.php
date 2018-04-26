@@ -40,8 +40,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!----start-Header---->
 		<div class="header">
 			<div class="search-bar">
-				<form>
-					<input type="text" name="search" placeholder="Bạn tìm gì..."><input type="submit" value="Search" />
+				<form action="{{url('search')}}" method="get">
+					<input type="text" name="search" placeholder="Nhập tên Sản phẩm Cần tìm..">
+					
+					<input type="submit" value="Search" />
 				</form>
 			</div>
 			<div class="clear"> </div>
@@ -63,18 +65,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="wrap">
 		<!----start-logo---->
 			<div class="logo">
-				<a href="index.html"><img src="web/images/slide/logo.png" title="logo" /></a>
+				<a href="{{url('/')}}"><img src="web/images/slide/logo.png" title="logo" /></a>
 			</div>
 		<!----end-logo---->
 		<!----start-top-nav---->
 		<div class="top-nav">
 			<ul>
-				<li><a href="index.html">Trang Chủ</a></li>
-				<li><a href="about.html">Giới Thiệu</a></li>
-				<li><a href="store.html">Store</a></li>
-				<li><a href="store.html">Đặc Trưng</a></li>
-				<li><a href="blog.html">Blog</a></li>
-				<li><a href="contact.html">Liên Hệ</a></li>
+				 <li><a href="{{url('/')}}">Trang Chủ</a></li>
+				<li><a href="{{url('about')}}">Giới Thiệu</a></li>
+				
+				<li><a href="#">Đặc Trưng</a></li>
+				<li><a href="{{url('blog')}}">Blog</a></li>
+				<li><a href="{{url('contact')}}">Liên Hệ</a></li>
 			</ul>
 		</div>
 		<div class="clear"> </div>
@@ -122,8 +124,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                   @if(isset($products))
 		         @foreach($products as $product)		
 				<div class="grid_1_of_4 images_1_of_4 products-info">
-					 <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}">
-					 <h3><a href="single.html">{{$product->name}}</a></h3>
+					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
+					 <h3><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a></h3>
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 
 					 <ul>

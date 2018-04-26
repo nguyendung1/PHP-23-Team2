@@ -3,15 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Technology;
 
 class Product extends Model
 {
-    //
+    protected $table = 'products';
 
-    protected $table='products';
-
-    protected $fillable=['name','price','quality','description','image','category_id'];
-
+    protected $fillable = ['name', 'price', 'quality', 'description', 'image', 'category_id'];
 
     public function category()
     {
@@ -25,6 +23,6 @@ class Product extends Model
 
     public function technology()
     {
-    	return $this->belongsTo('App\Technology', 'product_id', 'id');
+    	return $this->hasMany('App\Technology', 'product_id', 'id');
     }
 }

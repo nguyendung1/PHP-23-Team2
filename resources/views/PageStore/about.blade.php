@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <
 		<!----End-top-nav---->
 		<!----End-Header---->
-		@extents('layouts.masterStore')
+		@extends('layouts.masterStore')
 		@section('content')
 		    <div class="clear"> </div>
 		    <div class="wrap">

@@ -1,37 +1,52 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/','ProductsController@index');
 
+Route::get('about',function()
+{
+  	return view('PageStore.about');
+});
 
-//show product home page
+Route::get('blog',function()
+{
+  	return view('PageStore.blog');
+});
 
- Route::get('/','ProductsController@index');
+Route::get('contact',function()
+{
+  	return view('PageStore.contact');
+});
 
- //show store
+//show store
+Route::get('store/{id}', 'ProductsController@store');
 
- Route::get('store/{id}','ProductsController@store');
+//show tim du lieu
+Route::get('search', 'ProductsController@search');
 
+//tim tren gia tien
+Route::get('duoi_1_trieu', 'ProductsController@duoi_1_trieu');
+Route::get('1_den_3_trieu', 'ProductsController@MotDen3Trieu');
+Route::get('3_den_6_trieu', 'ProductsController@BaDen6Trieu');
+Route::get('6_den_10_trieu', 'ProductsController@SauDen10Trieu');
+Route::get('10_den_15_trieu', 'ProductsController@MuoiDen15Trieu');
+Route::get('tren_15_trieu', 'ProductsController@Tren15Trieu');
 
- Route::group(['prefix'=>'admin'], function()
- {
-	 Route::group(['prefix'=>'order'], function(){
-			Route::get('/order_list', 'ProductsController@list');
-			Route::get('/pending_order', 'ProductsController@pending_order');
-			Route::post('/search', 'ProductsController@search');
-			Route::get('/delete/{id}', 'ProductsController@delete');
+//view detail
+Route::get('view_detail/{id}','ProductsController@view_detail');
+
+//Search Admin
+Route::group(['prefix' => 'admin'], function()
+{
+	Route::group(['prefix' => 'order'], function(){
+		Route::get('/order_list', 'ProductsController@list');
+		Route::get('/pending_order', 'ProductsController@pending_order');
+		Route::post('/search', 'ProductsController@search_admin');
+		Route::get('/delete/{id}', 'ProductsController@delete');
 	});	
+	
 	Route::get('/home', function()
 	{
-			return view('layouts.masterAdmin');
+		return view('layouts.masterAdmin');
 	});
 });
 
