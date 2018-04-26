@@ -19,7 +19,7 @@ class Product extends Model
     	return $this->belongsTo('App\Category');	
     }
 
-    public function  technology()
+    public function technology()
     {
     	return $this->hasOne('App\Technology','product_id','id');
     }

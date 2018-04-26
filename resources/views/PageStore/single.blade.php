@@ -52,7 +52,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="clear"> </div>
 			<div class="header-top-nav">
 			   <ul>
-						<li><a href="#">Đăng Kí</a></li>
+					<li><a href="#">Đăng Kí</a></li>
 					<li><a href="#">Đăng Nhập</a></li>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>

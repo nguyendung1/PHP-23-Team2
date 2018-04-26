@@ -160,10 +160,4 @@ class ProductsController extends Controller
   
     }
 
-
-
-
-
-
-
 }
