@@ -159,5 +159,9 @@ class ProductsController extends Controller
       return view('PageStore.single',compact('product','technology','category'));
   
     }
+    public function dangki(){
+       return view('PageStore.dangki');
+    }
 
 }
+
