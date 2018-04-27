@@ -48,7 +48,8 @@
 
  Route::get('view_detail/{id}','ProductsController@view_detail');
 
- Route::get('dang-ky','ProductsController@dangki');
+ Route::get('dang-ky','ProductsController@getDangky');
+ Route::post('dang-ky','ProductsController@postDangKy');
 
 
 

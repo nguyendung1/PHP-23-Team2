@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         \Schema::defaultStringLength(191);
+        
         if(Schema::hasTable('categories')) {
              $categories=Category::all();
            view::share('categories',$categories);  

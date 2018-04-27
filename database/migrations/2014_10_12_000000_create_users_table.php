@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone_number');
             $table->integer('is_admin')->unsigned();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
 
         });
     }

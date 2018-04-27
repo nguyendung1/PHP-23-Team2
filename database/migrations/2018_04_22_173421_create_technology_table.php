@@ -25,9 +25,8 @@ class CreateTechnologyTable extends Migration
             $table->string('memory');
             $table->integer('pin');
             $table->integer('product_id')->unsigned()->nullable();
-
-            $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products');
+            $table->timestamps();
         });
     }
 

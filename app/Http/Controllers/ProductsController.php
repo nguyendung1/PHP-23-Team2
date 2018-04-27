@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Technology;
+use App\User;
 class ProductsController extends Controller
 {
     //show san pham
@@ -159,8 +160,14 @@ class ProductsController extends Controller
       return view('PageStore.single',compact('product','technology','category'));
   
     }
-    public function dangki(){
-       return view('PageStore.dangki');
+    public function getDangky(){
+
+      return view('PageStore.dangki');
+    }
+    public function postDangKy(Request $request){
+        $data = $request->all();
+        $data['is_admin'] = 1;
+        User::create($data);
     }
 
 }

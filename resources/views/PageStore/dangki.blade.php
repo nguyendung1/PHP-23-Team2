@@ -3,22 +3,18 @@
   <div class="container">
 		<div id="content">
 			
-			<form action="{{url('dang-ki')}}" method="post" class="beta-form-checkout">
+			<form action="{{url('dang-ky')}}" method="post" class="beta-form-checkout">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<div class="row">
 			
 					<div class="col-sm-6">
 						<h4 style="font-weight: bold;">Đăng kí</h4>
 						<div class="space20">&nbsp;</div>
-
-							<div class="form-block">
-							<label for="email">Tài khoản <span style="color:red">*</span></label>
-
-							<input type="text" id="email" name="username">
-							@if($errors->has('username'))
+						@if($errors->has('username'))
 								<p style="padding-left: 200px;" class="text-danger">{{$errors->first('username')}}</p>
 							@endif
-						</div>
+
+							
 						<div class="form-block">
 							<label for="email">Địa chỉ email <span style="color:red">*</span></label>
 							<input type="email" id="email" name="email" >
