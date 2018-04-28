@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('address');
             $table->string('phone_number');
+            $table->rememberToken(); 
             $table->integer('is_admin')->unsigned();
             $table->timestamps();
 

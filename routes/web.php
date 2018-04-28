@@ -48,8 +48,11 @@
 
  Route::get('view_detail/{id}','ProductsController@view_detail');
 
- Route::get('dang-ky','ProductsController@getDangky');
- Route::post('dang-ky','ProductsController@postDangKy');
+ Route::get('register','UserController@getRegister');
+ Route::post('register','UserController@postRegister');
 
+ Route::get('login','UserController@getLogin');
+ Route::post('login','UserController@postLogin');
+ Route::get('logout','UserController@logout');
 
 
