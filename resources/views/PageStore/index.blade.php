@@ -14,9 +14,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" type="text/css" href="web/images/slide/icon/mobilestore.jpg">
-		<link rel="stylesheet" href="web/styles/responsiveslides.css">
+		<link rel="stylesheet" href="{{asset('web/styles/responsiveslides.css')}}">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<script src="js/responsiveslides.min.js"></script>
+		<script src="{{asset('web/js/responsiveslides.min.js')}}"></script>
 		  <script>
 		    // You can also use "$(window).load(function() {"
 			    $(function () {
@@ -32,6 +32,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  	  .images_1_of_4
 		  	  {
 		  	  	width:23%;
+		  	  }
+		  	  @media screen and (max-width:480px)
+		  	  {
+		  	  	.images_1_of_4 {
+		         width: 59.85%;
+                 margin-left: 30%;
+	              }
+	              .sp{
+	              	display: none;
+	              } 
+	              .sp1{
+	              	display: block;
+	              }
+
+
+
 		  	  }
 		  </style>
 	</head>
@@ -103,27 +119,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    	<div class="top-3-grids">
 		    		<div class="section group">
 				<div class="grid_1_of_3 images_1_of_3">
-					  <a href="single.html"><img src="web/images/slide/grid-img1.jpg"></a>
-					  <h3>Điện Thoại Sắp Ra Mắt  03-07-2018</h3>
+					  <a href="{{url('/')}}"><img src="web/images/slide/grid-img1.jpg"></a>
+					  <h3>Hãng BlackBerry  Ra Mắt Ngày 05-06-2018</h3>
 				</div>
 				<div class="grid_1_of_3 images_1_of_3 second">
-					   <a href="single.html"><img src="web/images/slide/grid-img2.jpg"></a>
-					  <h3>Điện Thoại Sắp Ra Mắt 03-07-2018</h3>
+					   <a href="{{url('about')}}"><img src="web/images/slide/grid-img2.jpg"></a>
+					  <h3>Điện Thoại Sắp Ra Mắt 28-06-2018</h3>
 				</div>
 				<div class="grid_1_of_3 images_1_of_3 theree">
-					   <a href="single.html"><img src="web/images/slide/grid-img3.jpg"></a>
-					  <h3>Điện Thoại Sắp Ra Mắt 03-07-2018</h3>
+					   <a href="{{url('about')}}"><img src="web/images/slide/grid-img3.jpg"></a>
+					  <h3>Điện Thoại Sắp Ra Mắt 03-06-2018</h3>
 				</div>
 			</div>
 		    	</div>
 		    	
 		    <div class="content-grids">
-		    	<h4>Mặt Hàng Mua Nhiều Nhất Trong Tuần(Hiện Có {{count($products)}} Sản Phẩm.)</h4>
+		    	<div class="sp">
+		    	<h4>Mặt Hàng Mua Nhiều Nhất Trong Tuần</h4></div>
+		    	<div class="sp1" class="w3-text-brown"><h4>Hiện Có {{count($products)}} Sản Phẩm</h4></div>
 		    	<div class="section group">
-
+             
+	
+	  
                   @if(isset($products))
-		         @foreach($products as $product)		
-				<div class="grid_1_of_4 images_1_of_4 products-info">
+		         @foreach($products as $product)
+		        	
+				   <div class="grid_1_of_4 images_1_of_4 products-info" style="margin-left:5%;">
 					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
 					 <h3><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a></h3>
 					 <h3>{{number_format($product->price)}} VND</h3>
@@ -135,9 +156,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					 	<li><a  class="Wishlist" href="single.html"> </a></li>
 					 </ul>
 				</div>
+			
 			@endforeach
 			@endif	
-			
+
 			</div>
 		    
 		    	</div>
@@ -161,22 +183,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="footer">
 			<div class="wrap">
 			<div class="section group">
-				<div class="col_1_of_4 span_1_of_4">
-					<h3>Our Info</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+			<div class="col_1_of_4 span_1_of_4" >
+					<h3>Thông Tin Của Chúng Tôi</h3>
+					<p style="color: white;">Là một thành viên tự hào của gia đình MobileLowLab, bạn không phải đi ra khỏi con đường của bạn tìm thấy chúng tôi - chỉ cần tìm chúng tôi nơi các sản phẩm Mobile được bán. Chúng tôi có 100 địa điểm ở Việt Nam,Công Ty san xuất và phân phối đặt trụ sớ tại Singapore.</p>
+				</div>
+				<div class="col_1_of_4 span_1_of_4" >
+					<h3>Hướng Dẫn Mua Hàng</h3>
+					<p style="color: white;">Hướng dẫn mua hàng online.</p>
+					<p style="color: white;">Hướng dẫn mua hàng trả góp.</p>
+					<p style="color: white;">Chính sách đổi trả / bảo hành.</p>
 				</div>
 				<div class="col_1_of_4 span_1_of_4">
-					<h3>Latest-News</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h3>Store Location</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<h3>Vị Trí Cửa Hàng</h3>
+					<p style="color: white;"><a href="{{url('blog')}}">Nhấn Vào đây để Hiển Thị Của Hàng Gần Bạn Nhất</a></p>
 					<h3>Order-online</h3>
-					<p>080-1234-56789</p>
-					<p>080-1234-56780</p>
+					<p style="color: white;">080-1234-56789</p>
+					<p style="color: white;">080-1234-56780</p>
 				</div>
 				<div class="col_1_of_4 span_1_of_4 footer-lastgrid">
 					<h3>News-Letter</h3>
