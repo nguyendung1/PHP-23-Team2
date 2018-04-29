@@ -1,22 +1,10 @@
 <?php
 
-Route::get('/','ProductsController@index');
-
-Route::get('about',function()
-{
-  	return view('PageStore.about');
-});
-
-Route::get('blog',function()
-{
-  	return view('PageStore.blog');
-});
-
-Route::get('contact',function()
-{
-  	return view('PageStore.contact');
-});
-
+Route::get('/', 'ProductsController@index');
+Route::get('about', 'ProductsController@about');
+Route::get('blog', 'ProductsController@blog');  	
+Route::get('contact', 'ProductsController@contact');
+  	
 //show store
 Route::get('store/{id}', 'ProductsController@store');
 
@@ -32,7 +20,7 @@ Route::get('10_den_15_trieu', 'ProductsController@MuoiDen15Trieu');
 Route::get('tren_15_trieu', 'ProductsController@Tren15Trieu');
 
 //view detail
-Route::get('view_detail/{id}','ProductsController@view_detail');
+Route::get('view_detail/{id}', 'ProductsController@view_detail');
 
 //Search Admin
 Route::group(['prefix' => 'admin'], function()
