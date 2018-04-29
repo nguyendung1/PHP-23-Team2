@@ -18,6 +18,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script src="{{asset('web/js/jqzoom.pack.1.0.1.js')}}" type="text/javascript"></script>
 		<link rel="stylesheet" href="{{asset('web/styles/jqzoom.css')}}" type="text/css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<!-- boostrap-->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$(".jqzoom").jqzoom();
@@ -118,7 +124,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                            
 		    			<ul>
                                <li> <h3>{{$product->name}}</h3> </li><br>
-		    				    <li><h3>Thuộc Hãng:<a  class="active1" href="#"><span>{{$category->name}}</span></a></h3></li><br>
+		    				    <li><h3>Thuộc Hãng:<a  class="active1" href="{{url('store/'.$category->id)}}"><span>{{$category->name}}</span></a></h3></li><br>
 		    				
 		    				    <li><h3>Thông Số Kỹ Thuật</h3></li><br>
 		    				    <li>Màn Hình :{{$technology->screen}}</li><br>
@@ -127,7 +133,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    				    
 		    				    <li>CPU:{{$technology->cpu}}<a class="w3-text-blue" href="#">Apple A11 Bionic 6 nhân</a></li><br>
 		    				    <li>RAM :  {{$technology->ram}}  GB</li><br>
-		    				    <li>Bộ nhớ trong:{{$technology->rom}}</li><br>
+		    				    <li>Bộ nhớ trong:{{$technology->rom}} GB</li><br>
 		    				    <li>Thẻ Nhớ:	{{$technology->memory}}</li><br>
 		    				    <li>Dung lượng pin:	{{$technology->pin}} mAh, có sạc nhanh</li>
 
@@ -154,8 +160,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    			<div class="clear"> </div>
 		    		</div>
 		    		<div class="brand-history">
-		    			<h3>Description :</h3>
-		    			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+		    			<h3>Note:</h3>
+		    			<p>Khi đã xem chi tiết về sản phẩm bạn có thể nhấn vào mua ngay hoặc là thêm vào giỏ hàng hoặc nếu có vấn để gì thắc có thế để lại bình luận ở phía dưới chúng tôi sẽ trả lời bạn nhanh nhất có thế!Hy Vọng bạn sẽ hài lòng với sản phẩm và phương thức chăm sóc khách hàng của chúng tôi .</p>
 		    		
 		    		</div>
 		    		<div class="share">
@@ -165,20 +171,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    				<li> <a href="#"><img src="{{asset('web/images/slide/rss.png')}}" title="Rss" />Rss</a></li>
 		    			</ul>
 		    		</div>
-		    		<div class="clear"> </div>
+		    		<div class="clear"> </div><hr>
+		    		<!-- danh gia cua nguoi dung  -->	
+		    		<div class="menu_container">
+						<div class="container" style="height: auto;">
+							<form action="{{url('comments')}}" method="get">
+                        
+                          <legend> * Gữi Nhận Xét Của Bạn Về Sản Phẩm<span class="w3-text-red">*</span>:</legend>
+                            <div class="form-group">
+                           <textarea class="form-control" rows="3" cols="70" id="comment" placeholder="Mời Bạn nhập Đánh Giá ở đây..."></textarea><br><input type="submit"  value="Gữi Đánh Giá" class="btn btn-info">
+                           <input type="reset" name="" value="Hủy Đánh Giá" class="btn btn-danger">
+                           <p>Một đánh giá có ích thường dài từ 100 ký tự trở lên</p>
+                            </div>
+                             
+                         </form><hr>
+                          <h3>Khách Hàng Nhận Xét()</h3>
+                         <div style="height:" class="w3-card">
+                           <div style="margin-left: 3em;">   
+                         	<img style="float: left;" src="{{asset('web/images/slide/admin.png')}}" height="20">
+                         	<h5>Bởi:Nguyễn Dũng 2016-12-23 </h5><br><p><b>Bình Luận:</b>  mới mua 7999k nay còn 6999k chưa dc 10 ngày buồn thiệt chứ.</p>
+                         </div><hr>
+                          <div style="margin-left: 3em;">   
+                         	<img style="float: left;" src="{{asset('web/images/slide/admin.png')}}" height="20">
+                         	<h5>Bởi:Nguyễn Dũng 2016-12-23 </h5><br><p><b>Bình Luận:</b>mới mua 7999k nay còn 6999k chưa dc 10 ngày buồn thiệt chứ.</p>
+                         </div>
+                       </div>
+                    </div> 
+                      <!-- End Comment -->   
 		    		
 		    		</div>
 		    		<div class="clear"> </div>
-		    	<div class="menu_container">
-						<p class="menu_head">Lorem Ipsum<span class="plusminus">+</span></p>
-							<div class="menu_body" style="display: none;">
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-							</div>
-						<p class="menu_head">About Product<span class="plusminus">+</span></p>
-							<div class="menu_body" style="display: none;">
-							<p>theonlytutorials.com is providing a great varitey of tutorials and scripts to use it immediate on any project!</p>
-							</div>
-					</div>
+		    	
+		    	
 			</div>
 			
 		    	</div>

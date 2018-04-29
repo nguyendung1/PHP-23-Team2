@@ -13,6 +13,23 @@ use App\Technology;
 
 class ProductsController extends Controller
 {
+   //redirect view
+    public function about()
+    {
+        return view('PageStore.about');
+    }
+
+    public function blog()
+    {
+        return view('PageStore.blog');
+    }
+
+    public function contact()
+    {
+        return view('PageStore.contact');
+    }
+
+
     //show san pham
     public function index()
     {
@@ -31,14 +48,18 @@ class ProductsController extends Controller
     public function search(Request $request)
     {
         $value = $request->search;
-        if (isset($value)){                      
-            $product = Product::where('name',$value)->first();
-            if (isset($product)){                 
-                $category = Category::where('id',$product->category_id)->first();                
-                return view('PageStore.search',compact('product', 'category'));
-            }
-            return view('PageStore.search');     
-        }                
+        $product = Product::where('name',$value)->first();
+        $category = Category::where('name', $value)->first();   
+        if (isset($product)) {
+            return view('PageStore.search', compact('product'));
+        }
+        elseif (isset($category)) {
+            $products = $category->products()->get();
+            return view('PageStore.search', compact('products'));
+        }
+        return view('PageStore.search');
+
+                   
     }
 
     //tiem san pham duoi tren gia tien
@@ -84,7 +105,7 @@ class ProductsController extends Controller
     //gia tu 10-15 trieu
     public function muoiDen15Trieu()
     {
-        $products = Product::where('price', '>', 10000000)->where('price', '<', 15000000)->get();
+        $products = Product::where('price', '>', 10000000)->where('price', '<' , 15000000)->get();
         if (isset($products)){        
             return view('PageStore.search', compact('products'));
         }
@@ -145,5 +166,8 @@ class ProductsController extends Controller
         $order = Order::findorfail($id);
         $order->delete();
         return redirect('admin/order/order_list')->with('thongbao_delete', 'Delete Successful');
-    }   
+    } 
+
+
 }
+//////////////////////////////////////////////////////////////
