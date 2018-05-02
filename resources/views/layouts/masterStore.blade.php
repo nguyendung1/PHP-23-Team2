@@ -73,9 +73,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
 					@if(Auth::check())	
 						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a></li>
-			  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
-			  			<li><a href="{url('admin/changePass')}}">Tài Khoản Của Tôi</a></li>
 			  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+			  			<li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
+			  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
 			  			
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>

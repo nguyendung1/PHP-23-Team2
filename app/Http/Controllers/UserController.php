@@ -44,7 +44,7 @@ class UserController extends Controller
 
     public function logout(){
         Auth::logOut();
-        return back();
+        return redirect('/');
     }
 
     public function getChangePass(){

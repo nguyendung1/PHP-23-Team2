@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin'], function()
  Route::get('dangky','UserController@getRegister');
  Route::post('dangky','UserController@postRegister');
 
- Route::get('dangnhap','UserController@getLogin');
+ Route::get('dangnhap','UserController@getLogin')->name('login');
  Route::post('dangnhap','UserController@postLogin');
 
  Route::get('dangxuat','UserController@logout');
