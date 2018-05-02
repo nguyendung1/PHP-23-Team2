@@ -48,11 +48,22 @@
 
  Route::get('view_detail/{id}','ProductsController@view_detail');
 
- Route::get('register','UserController@getRegister');
- Route::post('register','UserController@postRegister');
+ Route::get('dangky','UserController@getRegister');
+ Route::post('dangky','UserController@postRegister');
 
- Route::get('login','UserController@getLogin');
- Route::post('login','UserController@postLogin');
- Route::get('logout','UserController@logout');
+ Route::get('dangnhap','UserController@getLogin');
+ Route::post('dangnhap','UserController@postLogin');
+
+ Route::get('dangxuat','UserController@logout');
+
+ Route::get('update/{$id}','UserController@getUpdate');
+ Route::post('update/','UserController@Update');
 
 
+ Route::get('admin/changePass','UserController@getChangePass');
+ Route::post('admin/changePass','UserController@ChangePass');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

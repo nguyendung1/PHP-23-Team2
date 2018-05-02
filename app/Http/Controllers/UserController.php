@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ChangePassRequest;
 
 
 class UserController extends Controller
@@ -42,8 +43,35 @@ class UserController extends Controller
     }
 
     public function logout(){
-      Auth::logOut();
-      return back();
+        Auth::logOut();
+        return back();
     }
 
+    public function getChangePass(){
+        return view('PageStore.changePass');
+    }
+
+    public function ChangePass(ChangePassRequest $request)
+    {
+         $user = User::where('email', $request->email)->first();
+         $data['password'] = bcrypt($request->password_new);
+         $user->update($data);
+         return back()->with('success', 'Bạn đã thay đổi mật khẩu thành công');
+
+    }
+    public function getUpdate(){
+        $user = Auth::user();
+        return view('PageStore.updateUser',compact('user'));
+    }
+
+    public function Update(Request $request){
+        echo $request->email;
+        $user = User::where('email',$request->email)->first();
+        $data = $request->all();
+        $user->update($data);
+        return back()->with('success', 'Bạn đã thay đổi thông tin thành công');;
+        
+    }
+   
+    
 }

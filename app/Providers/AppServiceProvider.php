@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Category;
+use Validator;
+use Hash;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
              $categories=Category::all();
            view::share('categories',$categories);  
        }
+        Validator::extend('password_old',function($attribute,$value,$parameters,$validator){
+            return Hash::check($value,current($parameters));
+       });
     }
 
     /**

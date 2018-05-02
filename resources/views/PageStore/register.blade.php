@@ -13,7 +13,7 @@
 <div class="container">
 	<div id="content">
 			
-		<form action="{{url('register')}}" method="post" style="margin-left: 30%;">
+		<form action="{{url('dangky')}}" method="post" style="margin-left: 30%;">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<div class="row">
 					

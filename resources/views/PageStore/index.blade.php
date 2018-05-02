@@ -51,16 +51,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<ul>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
-					<li><a href="#">Tài Khoản Của Tôi</a></li>
+					
 					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
 					@if(Auth::check())	
 						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a></li>
-			  			<li><a href="{{url('logout')}}">Đăng Xuất</a></li>
-			  			
+			  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+			  			<li><a href="{{url('admin/changePass')}}">Tài Khoản Của Tôi</a></li>
+			  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
 			  		@else
-					<li><a href="{{url('register')}}">Đăng Kí</a></li>
-					<li><a href="{{url('login')}}">Đăng Nhập</a></li>
+					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
+					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
 					@endif
+					
 				</ul>
 			</div>
 			<div class="clear"> </div>
@@ -130,8 +132,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                   @if(isset($products))
 		         @foreach($products as $product)		
 				<div class="grid_1_of_4 images_1_of_4 products-info">
-					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
-					 <h3><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a></h3>
+					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}" height="250px"></a>
+					 <h3><a href="{{url('view_detail/'.$product->id)}}" >{{$product->name}}</a></h3>
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 
 					 <ul>
