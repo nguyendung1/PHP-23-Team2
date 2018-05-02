@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/home', 'ProductsController@index');
+Route::get('/', 'ProductsController@index');
 Route::get('about', 'ProductsController@about');
 Route::get('blog', 'ProductsController@blog');  	
 Route::get('contact', 'ProductsController@contact');
@@ -46,7 +46,7 @@ Route::group(['prefix' => 'admin'], function()
 
  Route::get('dangxuat','UserController@logout');
 
- Route::get('update/{$id}','UserController@getUpdate');
+ Route::get('update/{$id}','UserController@getUpdate')->middleware('auth');
  Route::post('update/','UserController@Update');
 
 

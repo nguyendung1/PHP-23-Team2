@@ -35,7 +35,7 @@ class UserController extends Controller
         $data['email']=$request->email;
         $data['password']=$request->password;
         if(Auth::attempt($data)){
-         return back();
+         return redirect('/');
         }else{
           return back()->with('success','Vui Lòng Nhập Tài Khoản');
         }
@@ -65,7 +65,6 @@ class UserController extends Controller
     }
 
     public function Update(Request $request){
-        echo $request->email;
         $user = User::where('email',$request->email)->first();
         $data = $request->all();
         $user->update($data);
