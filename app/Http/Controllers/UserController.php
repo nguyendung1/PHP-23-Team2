@@ -31,7 +31,7 @@ class UserController extends Controller
     }
 
     public function postLogin(Request $request){
-      
+        
         $data['email']=$request->email;
         $data['password']=$request->password;
         if(Auth::attempt($data)){

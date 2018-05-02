@@ -10,7 +10,7 @@
           @endif
           </div><!-- form-group -->
       </div>
-<form action="{{url('login')}}" method="post" style="margin-left: 30%;">
+<form action="{{url('dangnhap')}}" method="post" style="margin-left: 30%;">
       <input type="hidden" name="_token" value="{{csrf_token()}}">
       <div class="col-md-6">
           <div class="space20">&nbsp;</div>
