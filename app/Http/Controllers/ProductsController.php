@@ -11,6 +11,7 @@ use App\OrderDetail;
 use App\User;
 use App\Technology;
 
+use Illuminate\Support\Facades\Auth;
 class ProductsController extends Controller
 {
    //redirect view
@@ -152,6 +153,7 @@ class ProductsController extends Controller
         return view('PagesAdmin.orders.pending_order', compact('order'));     
     }
 
+
     public function search_admin(Request $request)
     {
         $search = $request->search;
@@ -172,5 +174,9 @@ class ProductsController extends Controller
     } 
 
 
-}
 
+    
+
+
+
+}

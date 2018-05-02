@@ -15,12 +15,10 @@ class CreateCommentTable extends Migration
     {
         Schema::create('comment', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('avata');
-            
+            $table->string('avata'); 
             $table->string('name');
             $table->integer('product_id')->unsigned()->nullable();
             $table->text('content');
-            
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products');
         });

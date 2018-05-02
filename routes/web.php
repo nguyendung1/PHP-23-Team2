@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'ProductsController@index');
+Route::get('/home', 'ProductsController@index');
 Route::get('about', 'ProductsController@about');
 Route::get('blog', 'ProductsController@blog');  	
 Route::get('contact', 'ProductsController@contact');
@@ -38,7 +38,21 @@ Route::group(['prefix' => 'admin'], function()
 	});
 });
 
- Route::get('dang-ky','ProductsController@dangki');
+ Route::get('dangky','UserController@getRegister');
+ Route::post('dangky','UserController@postRegister');
+
+ Route::get('dangnhap','UserController@getLogin');
+ Route::post('dangnhap','UserController@postLogin');
+
+ Route::get('dangxuat','UserController@logout');
+
+ Route::get('update/{$id}','UserController@getUpdate');
+ Route::post('update/','UserController@Update');
+
+
+ Route::get('admin/changePass','UserController@getChangePass');
+ Route::post('admin/changePass','UserController@ChangePass');
+
 
 
 
