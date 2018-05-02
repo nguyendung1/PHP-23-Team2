@@ -12,7 +12,7 @@
 	
     <div id="wrap" align="center">
 		
-		<a id="show_cart" href="javascript:void(0)">ĐIỆN THOẠI {{$category->name}}({{count($products)}})</a>
+		<a id="show_cart" href="javascript:void(0)">ĐIỆN THOẠI {{$category->name}} Có {{count($products)}} Sản Phẩm</a>
 		
 		<ul>
 			
@@ -25,7 +25,7 @@
 		   @foreach($products as $product)	
 
 			<li id="1">
-				<a href="{{url('view_detail/'.$product->id)}}"><img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$category->name}}" /></a>
+				<a href="{{url('view_detail/'.$product->id)}}"><img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$product->image}}" /></a>
 				
 				<br clear="all" />
 				<div><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a><br><br>

@@ -16,7 +16,7 @@ class CreateTechnologyTable extends Migration
  
         Schema::create('technology', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            //$table->string('name');
             $table->string('screen');
             $table->string('system');
             $table->string('cpu');
