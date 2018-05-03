@@ -1,14 +1,7 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-     @extends('layouts.masterStore')
-     @section('content')
-	<!----End-top-nav---->
-		<!----End-Header---->
-         <div class="clear"> </div>
+@extends('layouts.masterStore')
+@section('content')
+	
+  <div class="clear"> </div>
 		    <div class="wrap">
 		    <div class="content">
 		    <div class="content-grids">

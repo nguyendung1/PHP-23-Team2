@@ -38,6 +38,25 @@ Route::group(['prefix' => 'admin'], function()
 	});
 });
 
+ Route::get('dangky','UserController@getRegister');
+ Route::post('dangky','UserController@postRegister');
+
+ Route::get('dangnhap','UserController@getLogin')->name('login');
+ Route::post('dangnhap','UserController@postLogin');
+
+ Route::get('dangxuat','UserController@logout');
+
+ Route::get('update/{$id}','UserController@getUpdate')->middleware('auth');
+ Route::post('update/','UserController@Update');
+
+
+ Route::get('admin/changePass','UserController@getChangePass');
+ Route::post('admin/changePass','UserController@ChangePass');
 
 
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
