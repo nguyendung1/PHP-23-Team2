@@ -43,6 +43,7 @@ class ProductsController extends Controller
         $category = Category::where('id', $id)->first();     
         $products = $category->products()->get();  
         return view('PageStore.store', compact('products', 'category'));
+
     }
 
     public function search(Request $request)
@@ -58,11 +59,13 @@ class ProductsController extends Controller
             return view('PageStore.search', compact('products'));
         }
         return view('PageStore.search');
+        //su dung wherehas de tim san pham va  gan voi % like
 
                    
     }
 
     //tiem san pham duoi tren gia tien
+    //chung vao 1 funnction  nhan 2 param va sua lai ten 
     public function duoi_1_trieu()
     {
         $product = Product::where('price', '<', 1000000)->first();        
@@ -85,7 +88,7 @@ class ProductsController extends Controller
     //gia tu 3-6 trieu
     public function BaDen6Trieu()
     {
-        $products = Product::where('price', '>', 3000000)->where('price', '<', 6000000)->get();
+        $products = Product::where('price', '>', 3000000)->where('price', '<' , 6000000)->get();
         if (isset($products)){         
           return view('PageStore.search', compact('products'));
         }      
@@ -95,7 +98,7 @@ class ProductsController extends Controller
     //gia tu 6-10 trieu
     public function SauDen10Trieu()
     {
-        $products = Product::where('price', '>', 6000000)->where('price', '<', 10000000)->get();
+        $products = Product::where('price', '>', 6000000)->where('price', '<' , 10000000)->get();
         if (isset($products)){        
             return view('PageStore.search', compact('products'));
         }
@@ -128,7 +131,8 @@ class ProductsController extends Controller
     {        
         $product = Product::find($id);
         $category = Category::find($product->category_id);      
-        $technology = $product->technology()->first();   
+        $technology = $product->technology()->first(); 
+        $technology = $product->technology;  
         return view('PageStore.single', compact('product', 'technology', 'category'));
     }
     
