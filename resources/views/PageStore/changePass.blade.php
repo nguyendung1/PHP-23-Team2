@@ -24,17 +24,6 @@
             <label for="">Email: </label> <span style="padding:5px">{{$user->email}}</span>
         </div>
         <div>
-            <label for="">Hình ảnh:</label>
-
-              <div style="padding-left: 200px;">
-                  @if($user->picture != '')
-                <img style="width: 80px;height: 80px;" src="images/user/{{$user->picture}}" alt="">
-                @else
-                Chưa có ảnh
-                @endif
-               </div>
-        </div>
-        <div>
             <label for="">Địa chỉ: </label> <span style="padding:5px" >{{$user->address}}</span>
         </div> 
         <div>
