@@ -11,9 +11,11 @@ use App\OrderDetail;
 use App\User;
 use App\Technology;
 
+
 use Illuminate\Support\Facades\Auth;
 class ProductsController extends Controller
 {
+ 
    //redirect view
     public function about()
     {
@@ -34,102 +36,78 @@ class ProductsController extends Controller
     //show san pham
     public function index()
     {
-        $products = Product::where('quality','>',4.6)->get();  
+        $products = Product::where('quality','>', 4.6)->paginate(12);  
         return view('PageStore.index', compact('products'));
     }
      
     //show san pham tung the loai
     public function store($id)
-    {
-        $category = Category::where('id', $id)->first();     
-        $products = $category->products()->get();  
+    {    
+        $category =  Category::where('id', $id)->first();
+        $products =  $category->products()->paginate(12);
         return view('PageStore.store', compact('products', 'category'));
     }
 
-    public function search(Request $request)
+    public function searchProduct(Request $request)
     {
-        $value = $request->search;
-        $product = Product::where('name',$value)->first();
-        $category = Category::where('name', $value)->first();   
-        if (isset($product)) {
-            return view('PageStore.search', compact('product'));
-        }
-        elseif (isset($category)) {
-            $products = $category->products()->get();
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search');
+        $searchQuery = $request->search;
+           if (isset($searchQuery)) {     
+           $products = Product::where('name', 'like', '%' . $searchQuery . '%')->paginate(12);
+            return view('PageStore.search', compact('products')); 
+           }
+            return view('PageStore.search');   
 
-                   
+            //if (isset($searchQuery)){
+         // $products = Product::whereHas('Category', function($query) use ($searchQuery) {
+          //      $query->where('name', 'like', '%' . $searchQuery . '%' ); 
+         //  })
+          // ->orWhere('name', 'like', '%' . $searchQuery . '%');
+             
+          // }
+          // $products = $products->paginate(18);
+          
+          
+                     
     }
 
     //tiem san pham duoi tren gia tien
-    public function duoi_1_trieu()
-    {
-        $product = Product::where('price', '<', 1000000)->first();        
-        if (isset($product)){
-            $category = Category::where('id', $product->category_id)->first();
-            return view('PageStore.search', compact('product', 'category'));
-        }
-        return view('PageStore.search');
-   }
+    //chung vao 1 funnction  nhan 2 param va sua lai ten 
+     public function searchFollowPrice($price1,$price2)
+     {
+         if ($price2 <= 1000000){
+            $products = Product::where('price', '<', 1000000)->paginate(12);
+            return view('PageStore.search' , compact('products'));   
+         }
+         else if ($price1 < 1000110 && $price1 < $price2){ 
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
+            return view('PageStore.search' , compact('products'));   
+         }
+         else if($price1 <3000100 && $price1 < $price2){
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
+            return view('PageStore.search' , compact('products'));
+         }
+         else if($price1 <6000100 && $price1 < $price2){
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
+            return view('PageStore.search' , compact('products'));
+         }
+         else if($price1 <10000100 && $price1 < $price2){
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
+            return view('PageStore.search' , compact('products'));
+         }
+         else if($price1 <15000100 && $price1 < $price2){
+            $products = Product::where('price','>', $price1)->where('price', '<', $price2)->paginate(12);
+            return view('PageStore.search' , compact('products'));
+         }
 
-    public function MotDen3Trieu()
-    {
-        $products = Product::where('price', '>', 1000000)->where('price', '<', 3000000)->get();
-        if (isset($products)){      
-            return view('PageStore.search', compact('products'));   
-        }
-        return view('PageStore.search'); 
-    }
-    
-    //gia tu 3-6 trieu
-    public function BaDen6Trieu()
-    {
-        $products = Product::where('price', '>', 3000000)->where('price', '<', 6000000)->get();
-        if (isset($products)){         
-          return view('PageStore.search', compact('products'));
-        }      
-        return view('PageStore.search');    
-    }
-
-    //gia tu 6-10 trieu
-    public function SauDen10Trieu()
-    {
-        $products = Product::where('price', '>', 6000000)->where('price', '<', 10000000)->get();
-        if (isset($products)){        
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search');      
-   }
-    
-    //gia tu 10-15 trieu
-    public function muoiDen15Trieu()
-    {
-        $products = Product::where('price', '>', 10000000)->where('price', '<' , 15000000)->get();
-        if (isset($products)){        
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search'); 
-   }
-    
-    //gia tu 15 trieu tro len
-    public function tren15Trieu()
-    {
-        $products = Product::where('price', '>', 15000000)->get();
-        if (isset($products)){              
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search');      
-    }
+     }
     // END tim Kiem
     
     //view details
-   public function view_detail($id)
+   public function viewDetail($id)
     {        
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $category = Category::find($product->category_id);      
-        $technology = $product->technology()->first();   
+        $technology = $product->technology()->first(); 
         return view('PageStore.single', compact('product', 'technology', 'category'));
     }
     
@@ -142,9 +120,6 @@ class ProductsController extends Controller
         $value_quantity = OrderDetail::sum('quantity');
         return view('PagesAdmin.orders.list_order', compact('order', 'user', 'value_price', 'value_quantity'));
     }
-
-
-
 
 
     public function pending_order()

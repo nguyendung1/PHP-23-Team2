@@ -45,14 +45,61 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 		});
 		</script>
+		<style type="text/css">
+			 .header-top-nav  ul
+		  	  {
+                   list-style-type: none;
+                   position: relative;
+		  	  }
+		  	  .header-top-nav ul li{
+
+		  	  }
+		  	  .header-top-nav ul li a{
+                   display: block;
+                   
+
+
+		  	  }
+		  	   .header-top-nav ul li a{
+                   display: block;
+
+		  	  } 
+		  	   .header-top-nav ul li a{
+                   display: block;
+               
+		  	  }   
+		  	   .header-top-nav ul ul{
+                   display: none;
+                   position: absolute;
+                   top: 100%;
+                   background-color:white;
+
+		  	  } 
+		  	   .header-top-nav ul li li{
+		  	   	float: none;
+		  	   }
+		  	    .header-top-nav ul li:hover >ul{
+		  	   display: block;
+		  	   }
+		  	    .header-top-nav >ul::after{
+		  	   	display: block;
+		  	   	content: "";
+		  	   	clear: both;
+		  	   }
+		 
+
+		</style>
 	</head>
 	<body>
 		<div class="wrap">
 		<!----start-Header---->
 		<div class="header">
+			
 			<div class="search-bar">
-				<form>
-					<input type="text"><input type="submit" value="Search" />
+				<form action="{{url('search')}}" method="get">
+					<input type="text" name="search" placeholder="Nhập tên Sản phẩm Cần tìm..">
+					
+					<input type="submit" value="Search" />
 				</form>
 			</div>
 			<div class="clear"> </div>
@@ -61,13 +108,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			  		
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
-				
-					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
+
+				    <li><a href="#"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>:(Trống)</a></li>
+					
 					@if(Auth::check())	
-						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a></li>
-			  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
-			  			<li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
-			  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
+						 <ul>
+			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+			  			    <li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
+			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+			  			 </ul>  
+			  		</li>	
+
+				
+					
+
 			  			
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
