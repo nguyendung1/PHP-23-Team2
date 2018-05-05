@@ -108,6 +108,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			  		
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
+
 				    <li><a href="#"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>:(Trống)</a></li>
 					
 					@if(Auth::check())	
@@ -118,11 +119,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
 			  			 </ul>  
 			  		</li>	
+
+				
+					
+
 			  			
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
 					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
-					
 					@endif
 					
 				

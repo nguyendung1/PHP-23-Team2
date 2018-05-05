@@ -47,9 +47,7 @@ Route::group(['prefix' => 'admin'], function()
  Route::post('admin/changePass','UserController@ChangePass');
 
 
-
-
-
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

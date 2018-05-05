@@ -121,6 +121,7 @@ class ProductsController extends Controller
         return view('PagesAdmin.orders.list_order', compact('order', 'user', 'value_price', 'value_quantity'));
     }
 
+
     public function pending_order()
     {
         $order = OrderDetail::where('status', 0)->get();
