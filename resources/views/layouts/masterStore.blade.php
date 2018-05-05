@@ -49,8 +49,49 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		});
 		</script>
 
-		
+		<style type="text/css">
+				  .header-top-nav  ul
+		  	  {
+                   list-style-type: none;
+                   position: relative;
+		  	  }
+		  	  .header-top-nav ul li{
 
+		  	  }
+		  	  .header-top-nav ul li a{
+                   display: block;
+                   
+
+
+		  	  }
+		  	   .header-top-nav ul li a{
+                   display: block;
+
+		  	  } 
+		  	   .header-top-nav ul li a{
+                   display: block;
+               
+		  	  }   
+		  	   .header-top-nav ul ul{
+                   display: none;
+                   position: absolute;
+                   top: 100%;
+                   background-color:white;
+
+		  	  } 
+		  	   .header-top-nav ul li li{
+		  	   	float: none;
+		  	   }
+		  	    .header-top-nav ul li:hover >ul{
+		  	   display: block;
+		  	   }
+		  	    .header-top-nav >ul::after{
+		  	   	display: block;
+		  	   	content: "";
+		  	   	clear: both;
+		  	   }
+		</style>
+     
 	</head>
 	<body>
 		<div class="wrap">
@@ -66,13 +107,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="clear"> </div>
 			<div class="header-top-nav">
 			  <ul>	
-
-					<li><a href="#">Đăng Kí</a></li>
-					<li><a href="#">Đăng Nhập</a></li>
+			  		
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
-					<li><a href="#">Tài Khoản Của Tôi</a></li>
-					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
+				    <li><a href="#"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>:(Trống)</a></li>
+					
+					@if(Auth::check())	
+					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
+						 <ul>
+			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+			  			    <li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
+			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+			  			 </ul>  
+			  		</li>	
+			  			
+			  		@else
+					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
+					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
+
+					@endif
+					
+
 				
                </ul>
 			</div>
@@ -90,7 +145,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!----start-top-nav---->
 		<div class="top-nav">
 			<ul>
-				 <li><a href="{{url('index')}}">Trang Chủ</a></li>
+				 <li><a href="{{url('/')}}">Trang Chủ</a></li>
 				<li><a href="{{url('about')}}">Giới Thiệu</a></li>
 				
 				<li><a href="#">Đặc Trưng</a></li>

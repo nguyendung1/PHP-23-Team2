@@ -17,6 +17,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<link rel="stylesheet" href="{{asset('web/styles/responsiveslides.css')}}">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="{{asset('web/js/responsiveslides.min.js')}}"></script>
+			<!-- boostrap-->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+           <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		  <script>
 		    // You can also use "$(window).load(function() {"
 			    $(function () {
@@ -45,10 +52,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	              .sp1{
 	              	display: block;
 	              }
-
-
+		  	  }
+		  	  .header-top-nav  ul
+		  	  {
+                   list-style-type: none;
+                   position: relative;
+		  	  }
+		  	  .header-top-nav ul li{
 
 		  	  }
+		  	  .header-top-nav ul li a{
+                   display: block;
+		  	  }
+		  	   .header-top-nav ul li a{
+                   display: block;
+
+		  	  } 
+		  	   .header-top-nav ul li a{
+                   display: block;
+               
+		  	  }   
+		  	   .header-top-nav ul ul{
+                   display: none;
+                   position: absolute;
+                   top: 100%;
+                   background-color:white;
+
+		  	  } 
+		  	   .header-top-nav ul li li{
+		  	   	float: none;
+		  	   }
+		  	    .header-top-nav ul li:hover >ul{
+		  	   display: block;
+		  	   }
+		  	    .header-top-nav >ul::after{
+		  	   	display: block;
+		  	   	content: "";
+		  	   	clear: both;
+		  	   }
+
 		  </style>
 	</head>
 	<body>
@@ -65,12 +107,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="clear"> </div>
 			<div class="header-top-nav">
 				<ul>
-					<li><a href="#">Đăng Kí</a></li>
-					<li><a href="#">Đăng Nhập</a></li>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
-					<li><a href="#">Tài Khoản Của Tôi</a></li>
-					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
+					<li><a href="#"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>:(Trống)</a></li>
+					
+					@if(Auth::check())	
+					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
+						 <ul>
+			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+			  			    <li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
+			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+			  			 </ul>  
+			  		</li>
+			  		@else
+					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
+					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
+					
+					@endif
+					
+					
 				</ul>
 			</div>
 			<div class="clear"> </div>
@@ -141,12 +196,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
              
 	
 	  
-                  @if(isset($products))
-		         @foreach($products as $product)
+                 @if(isset($products))
+
+		       	  @foreach($products as $product)
 		        	
 				   <div class="grid_1_of_4 images_1_of_4 products-info" style="margin-left:5%;">
 					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
 					 <h3><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a></h3>
+
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 
 					 <ul>
@@ -157,12 +214,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					 </ul>
 				</div>
 			
-			@endforeach
-			@endif	
+				@endforeach
+			@endif
 
 			</div>
+                 <div class="row">{{$products->links()}}</div>
 		    
 		    	</div>
+		    	
 		    	<div class="content-sidebar">
 		    		<h4>Hãng Sản Xuất</h4>
 		    		 
@@ -223,3 +282,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</body>
 </html>
 
+S

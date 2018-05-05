@@ -1,11 +1,5 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-     @extends('layouts.masterStore')
-     @section('content')
+@extends('layouts.masterStore')
+@section('content')
 	<!----End-top-nav---->
 		<!----End-Header---->
          <div class="clear"> </div>
@@ -31,28 +25,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		   @foreach($products as $product)	
 
 			<li id="1">
-				<a href="{{url('view_detail/'.$product->id)}}"><img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$product->image}}" /></a>
+				<a href="{{url('viewDetail/'.$product->id)}}"><img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$product->image}}" /></a>
 				
 				<br clear="all" />
-				<div><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a><br><br>
+				<div><a href="{{url('viewDetail/'.$product->id)}}">{{$product->name}}</a><br><br>
 					<p>{{number_format($product->price)}} VND</p><br>	
 					<p><strong style="background-color: green; color:white; border-radius: 5px;padding:0 2px;">{{$product->quality}}<i class="fa fa-star"></i></strong></p> 
                      
                      
 				</div>
 		   	</li>
-		   	@endforeach
 
-		   	@endif    		
+		   	@endforeach
+            
+             
+		   	@endif 
+
 		</ul>
 
+@if(isset($products)) <div class="w3-container"><div class="row">{{$products->links()}}</div>@endif
+
 	</div>
+
 	 
 		
 </div>
 
+
 </div>
+
 </div>
+
+
+
  
 		    	<div class="content-sidebar">
 		    		<h4>Hãng Sản Xuất</h4>
@@ -70,18 +75,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 							<li><h3>Mức Giá</h3></li>
 							
-							<li><a href="{{url('duoi_1_trieu')}}">Dưới 1 triệu</a></li>
-							<li><a href="{{url('1_den_3_trieu')}}">Từ 1-3 triệu</a></li>
-							<li><a href="{{url('3_den_6_trieu')}}">Từ 3-6 triệu</a></li>
-							<li><a href="{{url('6_den_10_trieu')}}">Từ 6-10 triệu</a></li>
-							<li><a href="{{url('10_den_15_trieu')}}">Từ 10-15 triệu</a></li>
-							<li><a href="{{url('tren_15_trieu')}}">Trên 15 triệu</a></li>
+							<li><a href="{{url('search_follow_price/500000/1000000')}}">Dưới 1 triệu</a></li>
+							<li><a href="{{url('search_follow_price/1000000/3000000')}}">Từ 1-3 triệu</a></li>
+							<li><a href="{{url('search_follow_price/3000000/6000000')}}">Từ 3-6 triệu</a></li>
+							<li><a href="{{url('search_follow_price/6000000/10000000')}}">Từ 6-10 triệu</a></li>
+							<li><a href="{{url('search_follow_price/10000000/15000000')}}">Từ 10-15 triệu</a></li>
+							<li><a href="{{url('search_follow_price/15000000/50000000')}}">Trên 15 triệu</a></li>
 						</ul>	
 				  		
 		    	</div>
 		    </div>
 		    <div class="clear"> </div>
 		    </div>
+
      </main>
 	@stop
 
