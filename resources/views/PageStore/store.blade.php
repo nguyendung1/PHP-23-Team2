@@ -75,12 +75,12 @@
 
 							<li><h3>Mức Giá</h3></li>
 							
-							<li><a href="{{url('search_follow_price/500000/1000000')}}">Dưới 1 triệu</a></li>
-							<li><a href="{{url('search_follow_price/1000000/3000000')}}">Từ 1-3 triệu</a></li>
-							<li><a href="{{url('search_follow_price/3000000/6000000')}}">Từ 3-6 triệu</a></li>
-							<li><a href="{{url('search_follow_price/6000000/10000000')}}">Từ 6-10 triệu</a></li>
-							<li><a href="{{url('search_follow_price/10000000/15000000')}}">Từ 10-15 triệu</a></li>
-							<li><a href="{{url('search_follow_price/15000000/50000000')}}">Trên 15 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/500000/1000000')}}">Dưới 1 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/1000000/3000000')}}">Từ 1-3 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/3000000/6000000')}}">Từ 3-6 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/6000000/10000000')}}">Từ 6-10 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/10000000/15000000')}}">Từ 10-15 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/15000000/50000000')}}">Trên 15 triệu</a></li>
 						</ul>	
 				  		
 		    	</div>
