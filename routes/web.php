@@ -53,7 +53,9 @@ Route::group(['prefix' => 'admin'], function()
  Route::get('admin/changePass','UserController@getChangePass');
  Route::post('admin/changePass','UserController@ChangePass');
 
-
+ Route::get('shopping',function(){
+ 	return view('PageStore.shoppingCart');
+ });
 
 
 

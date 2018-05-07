@@ -10,6 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<meta charset="utf-8">
 		<title>Mobilestore Website Template | About :: W3layouts</title>
 		<link href="{{asset('web/styles/style.css')}}" rel="stylesheet" type="text/css"  media="all" />
+		<link href="{{asset('web/styles/style4.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
