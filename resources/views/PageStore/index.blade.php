@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<head>
 		<meta charset="utf-8">
 		<title>Mobilestore Website Template | Home :: W3layouts</title>
-		
+		<link href="{{asset('web/styles/style.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<link href="{{asset('web/styles/style2.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
@@ -63,12 +63,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</form>
 			</div>
 			<div class="clear"> </div>
-			<div class="header-top-nav">
+			<div id='nav_menu'>
 				<ul>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
 					
-					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
+					<li><a href="#">shopingcart:(Trống)</a> </li>
 					@if(Auth::check())	
 						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a></li>
 			  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
