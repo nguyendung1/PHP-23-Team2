@@ -9,7 +9,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<head>
 		<meta charset="utf-8">
 		<title>Mobilestore Website Template | Home :: W3layouts</title>
-		<link href="{{asset('web/styles/style.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<link href="{{asset('web/styles/style2.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
@@ -49,6 +48,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 		  	  }
+
+
+
 		  </style>
 	</head>
 	<body>
@@ -63,17 +65,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</form>
 			</div>
 			<div class="clear"> </div>
-			<div id='nav_menu'>
+			<div class="header-top-nav" >
 				<ul>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
 					
-					<li><a href="#">shopingcart:(Trống)</a> </li>
+					<li><a href="#">shopingcart &nbsp;: (Trống)</a></li>
 					@if(Auth::check())	
-						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a></li>
-			  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
-			  			<li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
-			  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a>
+							
+					  			<li><a href="{{url('admin/changePass')}}">Tài Khoản Của Tôi</a></li>
+					  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+					  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+					  			
+							
+						</li>
+		  			
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
 					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
@@ -82,6 +89,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</ul>
 			</div>
 			<div class="clear"> </div>
+
 		</div>
 		</div>
 		<div class="clear"> </div>
@@ -104,6 +112,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</ul>
 		</div>
 		<div class="clear"> </div>
+
+
+
+
+
 		</div>
 		</div>
 		<!----End-top-nav---->
@@ -233,3 +246,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</body>
 </html>
 
+S
