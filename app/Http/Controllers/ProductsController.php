@@ -11,9 +11,12 @@ use App\Order;
 use App\OrderDetail;
 use App\User;
 use App\Technology;
+use App\Comment;
 
+use Illuminate\Support\Facades\Auth;
 class ProductsController extends Controller
 {
+//Client Site
    //redirect view
     public function about()
     {
@@ -33,105 +36,93 @@ class ProductsController extends Controller
     //show san pham
     public function index()
     {
-        $products = Product::where('quality','>',4.6)->get();  
+        $products = Product::where('quality','>', 4.6)->paginate(12);  
         return view('PageStore.index', compact('products'));
     }
      
     //show san pham tung the loai
     public function store($id)
-    {
-        $category = Category::where('id', $id)->first();     
-        $products = $category->products()->get();  
+    {    
+        $category =  Category::where('id', $id)->first();
+        $products =  $category->products()->paginate(12);
         return view('PageStore.store', compact('products', 'category'));
     }
 
-    public function search(Request $request)
-    {
-        $value = $request->search;
-        $product = Product::where('name',$value)->first();
-        $category = Category::where('name', $value)->first();   
-        if (isset($product)) {
-            return view('PageStore.search', compact('product'));
-        }
-        elseif (isset($category)) {
-            $products = $category->products()->get();
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search');
-
-                   
+    public function searchProduct(Request $request)
+    { 
+           if ($request->has('search')) { 
+           $query = Product::query(); 
+          $searchQuery = $request->search;
+          $query = Product::whereHas('category', function($query) use ($searchQuery) {
+                $query->where('name', 'like', '%' . $searchQuery . '%' ); 
+           })
+           ->orWhere('name', 'like', '%' . $searchQuery . '%');
+          }
+           $products = $query->paginate(12)->appends(request()->query());
+           return view('PageStore.search', compact('products'));      
     }
 
     //tiem san pham duoi tren gia tien
-    public function duoi_1_trieu()
-    {
-        $product = Product::where('price', '<', 1000000)->first();        
-        if (isset($product)){
-            $category = Category::where('id', $product->category_id)->first();
-            return view('PageStore.search', compact('product', 'category'));
-        }
-        return view('PageStore.search');
-   }
+    //chung vao 1 funnction  nhan 2 param va sua lai ten 
+     public function searchFollowPrice($price1,$price2)
+     {
+         if ($price2 <= 1000000){
+            $products = Product::where('price', '<', 1000000);
+             
+         }
+         else if ($price1 < 1000110 && $price1 < $price2){ 
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+             
+         }
+         else if($price1 <3000100 && $price1 < $price2){
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+            
+         }
+         else if($price1 <6000100 && $price1 < $price2){
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+            
+         }
+         else if($price1 <10000100 && $price1 < $price2){
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+           
+         }
+         else if($price1 <15000100 && $price1 < $price2){
+            $products = Product::where('price','>', $price1)->where('price', '<', $price2);
+           
+         }
+         $products = $products->paginate(12);
+         return view('PageStore.search' , compact('products'));
 
-    public function MotDen3Trieu()
-    {
-        $products = Product::where('price', '>', 1000000)->where('price', '<', 3000000)->get();
-        if (isset($products)){      
-            return view('PageStore.search', compact('products'));   
-        }
-        return view('PageStore.search'); 
-    }
-    
-    //gia tu 3-6 trieu
-    public function BaDen6Trieu()
-    {
-        $products = Product::where('price', '>', 3000000)->where('price', '<', 6000000)->get();
-        if (isset($products)){         
-          return view('PageStore.search', compact('products'));
-        }      
-        return view('PageStore.search');    
-    }
-
-    //gia tu 6-10 trieu
-    public function SauDen10Trieu()
-    {
-        $products = Product::where('price', '>', 6000000)->where('price', '<', 10000000)->get();
-        if (isset($products)){        
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search');      
-   }
-    
-    //gia tu 10-15 trieu
-    public function muoiDen15Trieu()
-    {
-        $products = Product::where('price', '>', 10000000)->where('price', '<' , 15000000)->get();
-        if (isset($products)){        
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search'); 
-   }
-    
-    //gia tu 15 trieu tro len
-    public function tren15Trieu()
-    {
-        $products = Product::where('price', '>', 15000000)->get();
-        if (isset($products)){              
-            return view('PageStore.search', compact('products'));
-        }
-        return view('PageStore.search');      
-    }
+     }
     // END tim Kiem
     
     //view details
-   public function view_detail($id)
+   public function viewDetail($id)
     {        
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $category = Category::find($product->category_id);      
-        $technology = $product->technology()->first();   
+        $technology = $product->technology()->first(); 
         return view('PageStore.single', compact('product', 'technology', 'category'));
     }
     
+ //comment 
+
+    public function comment(Request $request)
+    {
+
+         if (Auth::check()) {
+             $data['name'] = Auth::user()->name;
+             $data['product_id'] = $request->id;
+             $data['content'] = $request->content;
+             $comments = Comment::create($data);
+             
+             
+             return back();       
+         }
+         return back()->with('status', 'Đăng nhập mới có thể bình luận.');
+
+    }
+
 //ADMIN SITE 
     
     //Order
@@ -190,41 +181,7 @@ class ProductsController extends Controller
         $category = Category::all();
         return view('PagesAdmin.product.update_product', compact('product', 'category'));
     }
-    /*
-    public function save_update_product(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
-        $category = Category::all();
-        $this->validate($request,
-            [
-                'name' => 'required|min:10:max:50',
-                'price' => 'required',
-                'quality' => 'required|min:1|max:5',
-                'description' => 'required|max:100|min:10',
-                'category' => 'required'
-            ],
-            [
-                'name.required'=>'You must type name product',
-                'name.max'=>'Name must be greater than or equal to 50 and greater than 10 character',
-                'name.min'=>'Name must be greater than or equal to 50 and greater than 10 character',
-                'quality.required'=>'You must type quality',
-                'quality.max'=>'Quality must be greater than or equal to 5 and greater than 0',
-                'quality.min'=>'Quality must be greater than or equal to 5 and greater than 0',
-                'description.required'=>'You must type description',
-                'description.max'=>'Description must be greater than or equal to 100 and greater than 10',
-                'description.min'=>'Description must be greater than or equal to 100 and greater than 10',
-                'category.required'=>'You must choose Category'
-            ]);
-        $product = Product::findOrFail($id);
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->quality = $request->quality;
-        $product->description = $request->description;
-        $product->category_id = $request->category;
-        $product->save();
-        return redirect('admin/product/product_list')->with('thongbao_update','Update Successful');
-    }
-    */
+
 
     public function SaveUpdateProduct($id)
     {
@@ -240,7 +197,7 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('admin/product/product_list')->with('thongbao_delete', 'Delete Successful');
     }     
-
+    
     public function AddProduct()
     {
         $product = Product::all();
@@ -248,41 +205,6 @@ class ProductsController extends Controller
         return view('PagesAdmin.product.add_product', compact('product', 'category'));
     }
 
-    /*public function save_add_product(Request $request)
-    {
-        $this->validate($request,
-            [
-                'name' => 'required|min:10:max:50',
-                'price' => 'required',
-                'quality' => 'required|min:1|max:5',
-                'description' => 'required|max:100|min:10',
-                'category' => 'required',
-                'picture' => 'required'
-            ],
-            [
-                'name.required'=>'You must type name product',
-                'name.max'=>'Name must be greater than or equal to 50 and greater than 10 character',
-                'name.min'=>'Name must be greater than or equal to 50 and greater than 10 character',
-                'quality.required'=>'You must type quality',
-                'quality.max'=>'Quality must be greater than or equal to 5 and greater than 0',
-                'quality.min'=>'Quality must be greater than or equal to 5 and greater than 0',
-                'description.required'=>'You must type description',
-                'description.max'=>'Description must be greater than or equal to 100 and greater than 10',
-                'description.min'=>'Description must be greater than or equal to 100 and greater than 10',
-                'category.required'=>'You must choose Category',
-                'picture.required'=>'You must update picture'
-            ]);
-        $product = new Product;
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->quality = $request->quality;
-        $product->description = $request->description;
-        $product->category_id = $request->category;
-        $product->picture = $request->picture;
-        $product->save();
-        return redirect('admin/product/product_list')->with('thongbao_add', 'Add Successful');
-    }
-    */
 
     public function SaveAddProduct(Request $request)
     {
@@ -291,7 +213,7 @@ class ProductsController extends Controller
         return redirect('admin/product/product_list')->with('thongbao_add', 'Add Successful'); 
     }
 
-    public function SearchProduct(Request $request)
+    public function SearchProductAdmin(Request $request)
     {
         $search = $request->search;
         if (empty($search)){
@@ -306,4 +228,3 @@ class ProductsController extends Controller
         return view('PagesAdmin.product.search_product', compact('products', 'search'));
     }
 }
-

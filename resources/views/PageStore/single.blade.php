@@ -45,26 +45,92 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 		});
 		</script>
+		<style type="text/css">
+			 .header-top-nav  ul
+		  	  {
+                   list-style-type: none;
+                   position: relative;
+		  	  }
+		  	  .header-top-nav ul li{
+
+		  	  }
+		  	  .header-top-nav ul li a{
+                   display: block;
+                   
+
+
+		  	  }
+		  	   .header-top-nav ul li a{
+                   display: block;
+
+		  	  } 
+		  	   .header-top-nav ul li a{
+                   display: block;
+               
+		  	  }   
+		  	   .header-top-nav ul ul{
+                   display: none;
+                   position: absolute;
+                   top: 100%;
+                   background-color:white;
+
+		  	  } 
+		  	   .header-top-nav ul li li{
+		  	   	float: none;
+		  	   }
+		  	    .header-top-nav ul li:hover >ul{
+		  	   display: block;
+		  	   }
+		  	    .header-top-nav >ul::after{
+		  	   	display: block;
+		  	   	content: "";
+		  	   	clear: both;
+		  	   }
+		 
+
+		</style>
 	</head>
 	<body>
 		<div class="wrap">
 		<!----start-Header---->
 		<div class="header">
+			
 			<div class="search-bar">
-				<form>
-					<input type="text"><input type="submit" value="Search" />
+				<form action="{{url('search')}}" method="get">
+					<input type="text" name="search" placeholder="Nhập tên Sản phẩm Cần tìm..">
+					
+					<input type="submit" value="Search" />
 				</form>
 			</div>
 			<div class="clear"> </div>
 			<div class="header-top-nav">
-			   <ul>
-						<li><a href="#">Đăng Kí</a></li>
-					<li><a href="#">Đăng Nhập</a></li>
+			   <ul>	
+			  		
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
-					<li><a href="#">Tài Khoản Của Tôi</a></li>
-					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
-				</ul>
+
+				    <li><a href="{{url('shoppingCart')}}"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>    <span style="color:white;background-color:orange;border-radius:40%; font-size:1.5em;padding:1px 3px;">@if (Cart::content()){{count(Cart::content())}}@else (Trống) @endif </span></a></li>
+					
+					@if(Auth::check())	
+					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
+						 <ul>
+			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+			  			    <li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
+			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+			  			 </ul>  
+			  		</li>	
+
+				
+					
+
+			  			
+			  		@else
+					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
+					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
+					@endif
+					
+				
+               </ul>
 			</div>
 			<div class="clear"> </div>
 		</div>
@@ -101,9 +167,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    	<div class="details-page">
 		    		<div class="back-links">
 		    			<ul>
-		    				<li><a href="#">Home</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret image"></li>
-		    				<li><a href="#">Product</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret  image"></li>
-		    				<li><a href="#">ProductDetail</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret  image"></li>
+		    				<li><a href="{{url('/')}}">Home</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret image"></li>
+		    				<li><a href="{{url('store/'. $product->id)}}">Product</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret  image"></li>
+		    				<li><a href="{{url('viewDetail/' . $product->id )}}">ProductDetail</a><img src="{{asset('web/images/slide/arrow.png')}}" alt="caret  image"></li>
 		    			</ul>
 		    		</div>
 		    	</div>
@@ -152,7 +218,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			    				<li><p>Đánh Giá Người Mua :<strong style="background-color: green; color:white; border-radius: 5px;padding:0 2px;">{{$product->quality}}<i class="fa fa-star"></i></strong></p> </li>
 
 			    			</ul>
-			    			<a href="#">AddCart</a><br><br>
+			    			<a href="{{url('addCart/'. $product->id)}}">Thêm Vào Giỏ Hàng</a><br><br>
 
 			    			<i>Gọi <u>1800-6601</u> để được tư vấn (miễn phí cuộc gọi).</i>
 		    			</div>
@@ -175,26 +241,43 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    		<!-- danh gia cua nguoi dung  -->	
 		    		<div class="menu_container">
 						<div class="container" style="height: auto;">
-							<form action="{{url('comments')}}" method="get">
-                        
+							<form action="{{url('comment')}}" method="post">
+                          <input type="hidden" name="_token" value="{{csrf_token()}}">
                           <legend> * Gữi Nhận Xét Của Bạn Về Sản Phẩm<span class="w3-text-red">*</span>:</legend>
                             <div class="form-group">
-                           <textarea class="form-control" rows="3" cols="70" id="comment" placeholder="Mời Bạn nhập Đánh Giá ở đây..."></textarea><br><input type="submit"  value="Gữi Đánh Giá" class="btn btn-info">
+                           <textarea name="content" class="form-control" rows="3" cols="70" id="comment" placeholder="Mời Bạn nhập Đánh Giá ở đây..." required></textarea><br>
+                           <input type="hidden" name="id" value="{{$product->id}}">
+                            
+                           <input type="submit"  value="Gữi Đánh Giá" class="btn btn-info">
                            <input type="reset" name="" value="Hủy Đánh Giá" class="btn btn-danger">
                            <p>Một đánh giá có ích thường dài từ 100 ký tự trở lên</p>
                             </div>
                              
-                         </form><hr>
+                         </form>
+                          	<div class="form-block">
+									<input type="submit" name="" value="Đặt Hàng" class="btn btn-info">
+								      @if (Session::has('status'))
+										<div class="alert alert-success">
+										<h3 class="w3-text-red">{{ Session::get('status') }}</h3>
+										</div>
+									   @endif
+												
+										</div><hr>
                           <h3>Khách Hàng Nhận Xét()</h3>
+                          
+                           
                          <div style="height:" class="w3-card">
-                           <div style="margin-left: 3em;">   
+                           <div style="margin-left:3em;" >
+                           @if (isset($product->comments)) 
+                           @foreach($product->comments as $comments) 
+
                          	<img style="float: left;" src="{{asset('web/images/slide/admin.png')}}" height="20">
-                         	<h5>Bởi:Nguyễn Dũng 2016-12-23 </h5><br><p><b>Bình Luận:</b>  mới mua 7999k nay còn 6999k chưa dc 10 ngày buồn thiệt chứ.</p>
-                         </div><hr>
-                          <div style="margin-left: 3em;">   
-                         	<img style="float: left;" src="{{asset('web/images/slide/admin.png')}}" height="20">
-                         	<h5>Bởi:Nguyễn Dũng 2016-12-23 </h5><br><p><b>Bình Luận:</b>mới mua 7999k nay còn 6999k chưa dc 10 ngày buồn thiệt chứ.</p>
-                         </div>
+                         	<h5>Bởi:<i style="color:orange;"> {{$comments->name}}</i> | {{$comments->created_at}} </h5><br><p><b>Bình Luận:</b>  
+                         	{{$comments->content}} </p>
+                            <hr>
+                          @endforeach
+                          @endif
+                          </div>
                        </div>
                     </div> 
                       <!-- End Comment -->   
