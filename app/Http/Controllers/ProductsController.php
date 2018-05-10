@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
@@ -28,7 +29,6 @@ class ProductsController extends Controller
     {
         return view('PageStore.contact');
     }
-
 
     //show san pham
     public function index()
@@ -132,42 +132,178 @@ class ProductsController extends Controller
         return view('PageStore.single', compact('product', 'technology', 'category'));
     }
     
-    //Search Order
-    public function list()
+//ADMIN SITE 
+    
+    //Order
+    public function ListOrder()
     {
-        $order = Order::all();   
-        $user  = User::all();
+        $order = Order::all();          
         $value_price = OrderDetail::sum('price');
         $value_quantity = OrderDetail::sum('quantity');
-        return view('PagesAdmin.orders.list_order', compact('order', 'user', 'value_price', 'value_quantity'));
+        return view('PagesAdmin.orders.list_order', compact('order', 'value_price', 'value_quantity'));       
     }
 
-
-    public function pending_order()
+    public function PendingOrder()
     {
         $order = OrderDetail::where('status', 0)->get();
-        return view('PagesAdmin.orders.pending_order', compact('order'));     
+        $value_price = OrderDetail::sum('price');
+        $value_quantity = OrderDetail::sum('quantity');        
+        return view('PagesAdmin.orders.pending_order', compact('order', 'value_price', 'value_quantity'));     
     }
 
-    public function search_admin(Request $request)
+    public function SearchAdmin(Request $request)
     {
         $search = $request->search;
         $user = User::where('name', '=', $search)->first();
-        if(isset($user)){   
+        if (isset($user)){   
             $order = $user->Orders()->get();
             return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));
+        }
+        if ($search == 'Pending' or $search == 'pending'){
+            $order = OrderDetail::where('status', 0)->get();          
+            return view('PagesAdmin.orders.pending_order', compact('order'));            
+        }       
+        if (empty($search)){
+            return view('PagesAdmin.orders.not_found');     
         }
         $order = Order::where('id', 'like', $search)->orWhere('date_order', 'like', '%' .$search. '%')->get();
         return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));   
     }
 
-    public function delete($id)
+    public function DeleteOrder($id)
     {
         $order = Order::findorfail($id);
         $order->delete();
         return redirect('admin/order/order_list')->with('thongbao_delete', 'Delete Successful');
     } 
 
+    //Product
+    public function ListProduct()
+    {
+        $products = Product::all();                    
+        return view('PagesAdmin.product.list_product', compact('products'));
+    }  
 
+    public function UpdateProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $category = Category::all();
+        return view('PagesAdmin.product.update_product', compact('product', 'category'));
+    }
+    /*
+    public function save_update_product(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $category = Category::all();
+        $this->validate($request,
+            [
+                'name' => 'required|min:10:max:50',
+                'price' => 'required',
+                'quality' => 'required|min:1|max:5',
+                'description' => 'required|max:100|min:10',
+                'category' => 'required'
+            ],
+            [
+                'name.required'=>'You must type name product',
+                'name.max'=>'Name must be greater than or equal to 50 and greater than 10 character',
+                'name.min'=>'Name must be greater than or equal to 50 and greater than 10 character',
+                'quality.required'=>'You must type quality',
+                'quality.max'=>'Quality must be greater than or equal to 5 and greater than 0',
+                'quality.min'=>'Quality must be greater than or equal to 5 and greater than 0',
+                'description.required'=>'You must type description',
+                'description.max'=>'Description must be greater than or equal to 100 and greater than 10',
+                'description.min'=>'Description must be greater than or equal to 100 and greater than 10',
+                'category.required'=>'You must choose Category'
+            ]);
+        $product = Product::findOrFail($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->quality = $request->quality;
+        $product->description = $request->description;
+        $product->category_id = $request->category;
+        $product->save();
+        return redirect('admin/product/product_list')->with('thongbao_update','Update Successful');
+    }
+    */
+
+    public function SaveUpdateProduct($id)
+    {
+        $product = Product::findOrFail($id); 
+        $data = Input::get();
+        $product->update($data);
+        return redirect('admin/product/product_list')->with('thongbao_update','Update Successful');
+    }
+
+    public function DeleteProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect('admin/product/product_list')->with('thongbao_delete', 'Delete Successful');
+    }     
+
+    public function AddProduct()
+    {
+        $product = Product::all();
+        $category = Category::all();
+        return view('PagesAdmin.product.add_product', compact('product', 'category'));
+    }
+
+    /*public function save_add_product(Request $request)
+    {
+        $this->validate($request,
+            [
+                'name' => 'required|min:10:max:50',
+                'price' => 'required',
+                'quality' => 'required|min:1|max:5',
+                'description' => 'required|max:100|min:10',
+                'category' => 'required',
+                'picture' => 'required'
+            ],
+            [
+                'name.required'=>'You must type name product',
+                'name.max'=>'Name must be greater than or equal to 50 and greater than 10 character',
+                'name.min'=>'Name must be greater than or equal to 50 and greater than 10 character',
+                'quality.required'=>'You must type quality',
+                'quality.max'=>'Quality must be greater than or equal to 5 and greater than 0',
+                'quality.min'=>'Quality must be greater than or equal to 5 and greater than 0',
+                'description.required'=>'You must type description',
+                'description.max'=>'Description must be greater than or equal to 100 and greater than 10',
+                'description.min'=>'Description must be greater than or equal to 100 and greater than 10',
+                'category.required'=>'You must choose Category',
+                'picture.required'=>'You must update picture'
+            ]);
+        $product = new Product;
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->quality = $request->quality;
+        $product->description = $request->description;
+        $product->category_id = $request->category;
+        $product->picture = $request->picture;
+        $product->save();
+        return redirect('admin/product/product_list')->with('thongbao_add', 'Add Successful');
+    }
+    */
+
+    public function SaveAddProduct(Request $request)
+    {
+        $data = Input::all();
+        $product = Product::create($data);
+        return redirect('admin/product/product_list')->with('thongbao_add', 'Add Successful'); 
+    }
+
+    public function SearchProduct(Request $request)
+    {
+        $search = $request->search;
+        if (empty($search)){
+            return view('PagesAdmin.orders.not_found');     
+        }
+        $category = Category::where('name', 'like', '%' .$search. '%')->first();
+        if (isset($category)){   
+            $products = $category->products()->get();          
+            return view('PagesAdmin.product.search_product', compact('search', 'products', 'category'));
+        }
+        $products = Product::where('name', 'like', '%' .$search. '%')->get();
+        return view('PagesAdmin.product.search_product', compact('products', 'search'));
+    }
 }
-//////////////////////////////////////////////////////////////
+

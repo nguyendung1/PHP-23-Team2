@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreateProductsTable extends Migration
 {
@@ -20,9 +21,11 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('image');
             $table->integer('category_id')->unsigned()->nullable();
-
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');
+        });
+        Schema::table('product', function ($table) {
+            $table->softDeletes();
         });
     }
 
