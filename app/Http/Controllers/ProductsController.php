@@ -10,7 +10,7 @@ use App\Order;
 use App\OrderDetail;
 use App\User;
 use App\Technology;
-
+use App\Comment;
 
 use Illuminate\Support\Facades\Auth;
 class ProductsController extends Controller
@@ -49,25 +49,17 @@ class ProductsController extends Controller
     }
 
     public function searchProduct(Request $request)
-    {
-        $searchQuery = $request->search;
-           if (isset($searchQuery)) {     
-           $products = Product::where('name', 'like', '%' . $searchQuery . '%')->paginate(12);
-            return view('PageStore.search', compact('products')); 
-           }
-            return view('PageStore.search');   
-
-            //if (isset($searchQuery)){
-         // $products = Product::whereHas('Category', function($query) use ($searchQuery) {
-          //      $query->where('name', 'like', '%' . $searchQuery . '%' ); 
-         //  })
-          // ->orWhere('name', 'like', '%' . $searchQuery . '%');
-             
-          // }
-          // $products = $products->paginate(18);
-          
-          
-                     
+    { 
+           if ($request->has('search')) { 
+           $query = Product::query(); 
+          $searchQuery = $request->search;
+          $query = Product::whereHas('category', function($query) use ($searchQuery) {
+                $query->where('name', 'like', '%' . $searchQuery . '%' ); 
+           })
+           ->orWhere('name', 'like', '%' . $searchQuery . '%');
+          }
+           $products = $query->paginate(12)->appends(request()->query());
+           return view('PageStore.search', compact('products'));      
     }
 
     //tiem san pham duoi tren gia tien
@@ -75,29 +67,31 @@ class ProductsController extends Controller
      public function searchFollowPrice($price1,$price2)
      {
          if ($price2 <= 1000000){
-            $products = Product::where('price', '<', 1000000)->paginate(12);
-            return view('PageStore.search' , compact('products'));   
+            $products = Product::where('price', '<', 1000000);
+             
          }
          else if ($price1 < 1000110 && $price1 < $price2){ 
-            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
-            return view('PageStore.search' , compact('products'));   
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+             
          }
          else if($price1 <3000100 && $price1 < $price2){
-            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
-            return view('PageStore.search' , compact('products'));
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+            
          }
          else if($price1 <6000100 && $price1 < $price2){
-            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
-            return view('PageStore.search' , compact('products'));
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+            
          }
          else if($price1 <10000100 && $price1 < $price2){
-            $products = Product::where('price', '>', $price1)->where('price', '<', $price2)->paginate(12);
-            return view('PageStore.search' , compact('products'));
+            $products = Product::where('price', '>', $price1)->where('price', '<', $price2);
+           
          }
          else if($price1 <15000100 && $price1 < $price2){
-            $products = Product::where('price','>', $price1)->where('price', '<', $price2)->paginate(12);
-            return view('PageStore.search' , compact('products'));
+            $products = Product::where('price','>', $price1)->where('price', '<', $price2);
+           
          }
+         $products = $products->paginate(12);
+         return view('PageStore.search' , compact('products'));
 
      }
     // END tim Kiem
@@ -148,7 +142,24 @@ class ProductsController extends Controller
         return redirect('admin/order/order_list')->with('thongbao_delete', 'Delete Successful');
     } 
 
+ //comment 
 
+
+    public function comment(Request $request)
+    {
+
+         if (Auth::check()) {
+             $data['name'] = Auth::user()->name;
+             $data['product_id'] = $request->id;
+             $data['content'] = $request->content;
+             $comments = Comment::create($data);
+             
+             
+             return back();       
+         }
+         return back()->with('status', 'Đăng nhập mới có thể bình luận.');
+
+    }
 
     
 

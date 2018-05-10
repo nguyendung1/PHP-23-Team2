@@ -110,7 +110,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
 
-					<li><a href="#"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>:(Trống)</a></li>
+					 
+					 	 <li><a href="{{url('shoppingCart')}}"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>    <span style="color:white;background-color:orange;border-radius:40%; font-size:1.5em;padding:1px 3px;">@if (Cart::content()){{count(Cart::content())}}@else (Trống) @endif </span></a></li>
+					 	 
+					 	</span></a></li>
 					
 					@if(Auth::check())	
 					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
@@ -201,8 +204,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		       	  @foreach($products as $product)
 		        	
 				   <div class="grid_1_of_4 images_1_of_4 products-info" style="margin-left:5%;">
-					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
-					 <h3><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a></h3>
+					<a href="{{url('viewDetail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
+					 <h3><a href="{{url('viewDetail/'.$product->id)}}">{{$product->name}}</a></h3>
 
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 

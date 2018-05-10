@@ -7,7 +7,7 @@ use App\User;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChangePassRequest;
-
+use DB;
 
 class UserController extends Controller
 {
