@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
@@ -15,7 +16,7 @@ use App\Comment;
 use Illuminate\Support\Facades\Auth;
 class ProductsController extends Controller
 {
- 
+//Client Site
    //redirect view
     public function about()
     {
@@ -31,7 +32,6 @@ class ProductsController extends Controller
     {
         return view('PageStore.contact');
     }
-
 
     //show san pham
     public function index()
@@ -105,45 +105,7 @@ class ProductsController extends Controller
         return view('PageStore.single', compact('product', 'technology', 'category'));
     }
     
-    //Search Order
-    public function list()
-    {
-        $order = Order::all();   
-        $user  = User::all();
-        $value_price = OrderDetail::sum('price');
-        $value_quantity = OrderDetail::sum('quantity');
-        return view('PagesAdmin.orders.list_order', compact('order', 'user', 'value_price', 'value_quantity'));
-    }
-
-
-    public function pending_order()
-    {
-        $order = OrderDetail::where('status', 0)->get();
-        return view('PagesAdmin.orders.pending_order', compact('order'));     
-    }
-
-
-    public function search_admin(Request $request)
-    {
-        $search = $request->search;
-        $user = User::where('name', '=', $search)->first();
-        if(isset($user)){   
-            $order = $user->Orders()->get();
-            return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));
-        }
-        $order = Order::where('id', 'like', $search)->orWhere('date_order', 'like', '%' .$search. '%')->get();
-        return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));   
-    }
-
-    public function delete($id)
-    {
-        $order = Order::findorfail($id);
-        $order->delete();
-        return redirect('admin/order/order_list')->with('thongbao_delete', 'Delete Successful');
-    } 
-
  //comment 
-
 
     public function comment(Request $request)
     {
@@ -161,8 +123,108 @@ class ProductsController extends Controller
 
     }
 
+//ADMIN SITE 
     
+    //Order
+    public function ListOrder()
+    {
+        $order = Order::all();          
+        $value_price = OrderDetail::sum('price');
+        $value_quantity = OrderDetail::sum('quantity');
+        return view('PagesAdmin.orders.list_order', compact('order', 'value_price', 'value_quantity'));       
+    }
+
+    public function PendingOrder()
+    {
+        $order = OrderDetail::where('status', 0)->get();
+        $value_price = OrderDetail::sum('price');
+        $value_quantity = OrderDetail::sum('quantity');        
+        return view('PagesAdmin.orders.pending_order', compact('order', 'value_price', 'value_quantity'));     
+    }
+
+    public function SearchAdmin(Request $request)
+    {
+        $search = $request->search;
+        $user = User::where('name', '=', $search)->first();
+        if (isset($user)){   
+            $order = $user->Orders()->get();
+            return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));
+        }
+        if ($search == 'Pending' or $search == 'pending'){
+            $order = OrderDetail::where('status', 0)->get();          
+            return view('PagesAdmin.orders.pending_order', compact('order'));            
+        }       
+        if (empty($search)){
+            return view('PagesAdmin.orders.not_found');     
+        }
+        $order = Order::where('id', 'like', $search)->orWhere('date_order', 'like', '%' .$search. '%')->get();
+        return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));   
+    }
+
+    public function DeleteOrder($id)
+    {
+        $order = Order::findorfail($id);
+        $order->delete();
+        return redirect('admin/order/order_list')->with('thongbao_delete', 'Delete Successful');
+    } 
+
+    //Product
+    public function ListProduct()
+    {
+        $products = Product::all();                    
+        return view('PagesAdmin.product.list_product', compact('products'));
+    }  
+
+    public function UpdateProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $category = Category::all();
+        return view('PagesAdmin.product.update_product', compact('product', 'category'));
+    }
 
 
+    public function SaveUpdateProduct($id)
+    {
+        $product = Product::findOrFail($id); 
+        $data = Input::get();
+        $product->update($data);
+        return redirect('admin/product/product_list')->with('thongbao_update','Update Successful');
+    }
 
+    public function DeleteProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect('admin/product/product_list')->with('thongbao_delete', 'Delete Successful');
+    }     
+    
+    public function AddProduct()
+    {
+        $product = Product::all();
+        $category = Category::all();
+        return view('PagesAdmin.product.add_product', compact('product', 'category'));
+    }
+
+
+    public function SaveAddProduct(Request $request)
+    {
+        $data = Input::all();
+        $product = Product::create($data);
+        return redirect('admin/product/product_list')->with('thongbao_add', 'Add Successful'); 
+    }
+
+    public function SearchProductAdmin(Request $request)
+    {
+        $search = $request->search;
+        if (empty($search)){
+            return view('PagesAdmin.orders.not_found');     
+        }
+        $category = Category::where('name', 'like', '%' .$search. '%')->first();
+        if (isset($category)){   
+            $products = $category->products()->get();          
+            return view('PagesAdmin.product.search_product', compact('search', 'products', 'category'));
+        }
+        $products = Product::where('name', 'like', '%' .$search. '%')->get();
+        return view('PagesAdmin.product.search_product', compact('products', 'search'));
+    }
 }

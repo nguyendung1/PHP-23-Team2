@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+ERROR
+=======
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -80,3 +83,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		@stop
 
 
+>>>>>>> dffa2df82a1eeead0e04415558e448c684f585bb

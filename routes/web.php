@@ -1,5 +1,11 @@
 <?php
-
+use App\Product;
+use App\Category;
+use App\Order;
+use App\OrderDetail;
+use App\User;
+use App\Technology;
+use Illuminate\Support\Facades\Input;
 Route::get('/', 'ProductsController@index');
 Route::get('about', 'ProductsController@about');
 Route::get('blog', 'ProductsController@blog');  	
@@ -15,19 +21,22 @@ Route::get('searchFollowPrice/{price1}/{price2}', 'ProductsController@searchFoll
 //view detail
 Route::get('viewDetail/{id}', 'ProductsController@viewDetail');
 
-//Search Admin
+//Site Admin
 Route::group(['prefix' => 'admin'], function()
 {
 	Route::group(['prefix' => 'order'], function(){
-		Route::get('/order_list', 'ProductsController@list');
-		Route::get('/pending_order', 'ProductsController@pending_order');
-		Route::post('/search', 'ProductsController@search_admin');
-		Route::get('/delete/{id}', 'ProductsController@delete');
+		Route::get('/order_list', 'ProductsController@ListOrder');
+		Route::get('/pending_order', 'ProductsController@PendingOrder');
+		Route::post('/search', 'ProductsController@SearchAdmin');
 	});	
-	
-	Route::get('/home', function()
-	{
-		return view('layouts.masterAdmin');
+	Route::group(['prefix' => 'product'], function(){
+		Route::get('product_list', 'ProductsController@ListProduct');
+		Route::get('product_update/{id}', 'ProductsController@UpdateProduct');
+		Route::post('product_update/{id}', 'ProductsController@SaveUpdateProduct');
+		Route::get('product_add', 'ProductsController@AddProduct');
+		Route::post('product_add', 'ProductsController@SaveAddProduct');
+		Route::post('/search_product', 'ProductsController@SearchProductAdmin');
+		Route::get('/delete/{id}', 'ProductsController@DeleteProduct');
 	});
 });
 
