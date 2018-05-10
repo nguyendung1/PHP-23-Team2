@@ -143,10 +143,10 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin/TheLoai/list">List User</a>
+                                    <a href="{{url('admin/user/list_user')}}">List User</a>
                                 </li>
                                 <li>
-                                    <a href="admin/TheLoai/create">Add User</a>
+                                    <a href="{{url('admin/user/add_user')}}">Add User</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

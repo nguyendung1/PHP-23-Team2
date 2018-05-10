@@ -9,6 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<head>
 		<meta charset="utf-8">
 		<title>Mobilestore Website Template | About :: W3layouts</title>
+		<base href="{{asset('')}}">
 		<link href="{{asset('web/styles/style.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<link href="{{asset('web/styles/style4.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
@@ -65,26 +66,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</form>
 			</div>
 			<div class="clear"> </div>
-			<div class="header-top-nav">
-			  <ul>	
-			  		
+			<div class="header-top-nav" >
+				<ul>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
-				
-					<li><a href="#"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
+					
+					
 					@if(Auth::check())	
-						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a></li>
-			  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
-			  			<li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
-			  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
-			  			
+						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a>
+							
+					  			<li><a href="{{url('admin/changePass')}}">Tài Khoản Của Tôi</a></li>
+					  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+					  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+					  	
+							
+						</li>
+		  				<li><a href="{{url('')}}"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
 					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
 					@endif
 					
-				
-               </ul>
+				</ul>
 			</div>
 			<div class="clear"> </div>
 		</div>

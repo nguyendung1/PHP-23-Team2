@@ -9,6 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<head>
 		<meta charset="utf-8">
 		<title>Mobilestore Website Template | Home :: W3layouts</title>
+		<base href="{{asset('')}}">
 		<link href="{{asset('web/styles/style2.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
@@ -48,8 +49,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 		  	  }
-
-
+		  	  
 
 		  </style>
 	</head>
@@ -70,17 +70,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
 					
-					<li><a href="#">shopingcart &nbsp;: (Trống)</a></li>
+					
 					@if(Auth::check())	
-						<li><a href="{{url('')}}">Chào bạn ! {{Auth::user()->name}}</a>
+						<li><a href="{{url('shopping')}}">Chào bạn ! {{Auth::user()->name}}</a>
 							
 					  			<li><a href="{{url('admin/changePass')}}">Tài Khoản Của Tôi</a></li>
 					  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
 					  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
-					  			
+					  		
 							
 						</li>
-		  			
+		  				<li><a href="{{url('')}}"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
 					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
@@ -103,9 +103,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!----start-top-nav---->
 		<div class="top-nav">
 			<ul>
-				 <li><a href="{{url('/')}}">Trang Chủ</a></li>
+				<li><a href="{{url('/')}}">Trang Chủ</a></li>
 				<li><a href="{{url('about')}}">Giới Thiệu</a></li>
-				
 				<li><a href="#">Đặc Trưng</a></li>
 				<li><a href="{{url('blog')}}">Blog</a></li>
 				<li><a href="{{url('contact')}}">Liên Hệ</a></li>

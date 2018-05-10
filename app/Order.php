@@ -10,19 +10,20 @@ class Order extends Model
     
     protected $table = 'orders';
 
-    protected $fillable = ['id', 'name', 'user_id', 'phone_number', 'address', 'total', 'date_order', 'note'];
+    protected $fillable = ['id', 'name', 'user_id', 'phone_number', 'address', 'total', 'date_order', 'note','status'];
 
     public function user()
     {
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo('App\User','user_id','id');
 
     }    
 
     public function order_detail()
     {
-    	return $this->hasOne('App\OrderDetail');
+    	return $this->hasMany('App\OrderDetail','order_id','id');
 
     }
+   
     
 
 }

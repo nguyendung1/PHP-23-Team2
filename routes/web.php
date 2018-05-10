@@ -31,7 +31,15 @@ Route::group(['prefix' => 'admin'], function()
 		Route::post('/search', 'ProductsController@search_admin');
 		Route::get('/delete/{id}', 'ProductsController@delete');
 	});	
-	
+	Route::group(['prefix' => 'user'], function(){
+		Route::get('/add_user','UserController@getUser');
+		Route::post('/add_user','UserController@postUser');
+		Route::get('/list_user','UserController@listUser');
+		Route::get('/delete/{id}','UserController@delete');
+		Route::get('/edit_user/{id}','UserController@getEdit');
+		Route::post('/edit_user/{id}','UserController@postEdit');
+		
+	});
 	Route::get('/home', function()
 	{
 		return view('layouts.masterAdmin');
@@ -53,11 +61,10 @@ Route::group(['prefix' => 'admin'], function()
  Route::get('admin/changePass','UserController@getChangePass');
  Route::post('admin/changePass','UserController@ChangePass');
 
- Route::get('shopping',function(){
- 	return view('PageStore.shoppingCart');
- });
+ Route::get('shopping',"OrderController@listOrder");
 
-
+Route::get('status/{id}/{status}','OrderController@status');
+Route::get('chitiet/{id}','OrderController@detailOrder');
 
 Auth::routes();
 
