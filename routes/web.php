@@ -51,3 +51,20 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// thiet lap route gio hang 
+
+Route::get('addCart/{id}', 'CartController@AddCart');
+Route::get('shoppingCart', 'CartController@shoppingCart');
+Route::get('deleteCart/{rowId}', 'CartController@deleteCart');
+Route::patch('updateCart/{rowId}', 'CartController@updateCart');
+Route::post('order', 'CartController@checkOut');
+Route::get('updateIncrement/{rowId}', 'CartController@updateIncrement');
+Route::get('updateDecrese/{rowId}', 'CartController@updateDecrese');
+
+
+//comments
+
+Route::post('comment', 'ProductsController@comment');
+
+
