@@ -30,7 +30,7 @@
 						</div>
 
 						<div class="form-block">
-							<label for="your_last_name">Tên đầy đủ: </label>
+							<label for="your_last_name">Tên tài khoản: </label>
 							<input type="text" class="form-control" id="your_last_name" name="name" >
 						</div>
 

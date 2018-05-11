@@ -17,6 +17,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<link rel="stylesheet" href="{{asset('web/styles/responsiveslides.css')}}">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="{{asset('web/js/responsiveslides.min.js')}}"></script>
+			<!-- boostrap-->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+           <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		  <script>
 		    // You can also use "$(window).load(function() {"
 			    $(function () {
@@ -45,11 +52,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	              .sp1{
 	              	display: block;
 	              }
-
-
+		  	  }
+		  	  .header-top-nav  ul
+		  	  {
+                   list-style-type: none;
+                   position: relative;
+		  	  }
+		  	  .header-top-nav ul li{
 
 		  	  }
+		  	  .header-top-nav ul li a{
+                   display: block;
+                   width: 110px;
+		  	  } 
+		  	   .header-top-nav ul ul{
+                   display: none;
+                   position: absolute;
+                   top: 100%;
+                   background-color:white;
+
+		  	  } 
+		  	   .header-top-nav ul li li{
+		  	   	float: none;
+		  	   }
+		  	    .header-top-nav ul li:hover >ul{
+		  	   display: block;
+		  	   }
+		  	    .header-top-nav >ul::after{
+		  	   	display: block;
+		  	   	content: "";
+		  	   	clear: both;
+		  	   }
+
+
 		  	  
+		  	  
+
 
 		  </style>
 	</head>
@@ -69,23 +107,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<ul>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
+
+					 
+					 	 <li><a href="{{url('shoppingCart')}}"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>    <span style="color:white;background-color:orange;border-radius:40%; font-size:1.5em;padding:1px 3px;">@if (Cart::content()){{count(Cart::content())}}@else (Trống) @endif </span></a></li>
+					 	 
+					 	</span></a></li>
+				
 					
-					
-					@if(Auth::check())	
+			          @if(Auth::check())	
 						<li><a href="{{url('shopping')}}">Chào bạn ! {{Auth::user()->name}}</a>
-							
+                             <ul>							
 					  			<li><a href="{{url('admin/changePass')}}">Tài Khoản Của Tôi</a></li>
-					  			<li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
+					  			@if(Auth::user()->is_admin==1)
+				  			    <li><a href="{{url('admin/home')}}">Quản Trị</a></li>
+				  			  	@endif
+					  			<li><a href="{{url('update/{$id}')}}">Đổi Password</a></li>
 					  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
-					  		
+					  		</ul>
 							
 						</li>
-		  				<li><a href="{{url('')}}"><span>shopingcart &nbsp;: </span></a><lable> &nbsp;(Trống)</lable></li>
+		  			
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
 					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
-					@endif
 					
+					@endif
+		
 				</ul>
 			</div>
 			<div class="clear"> </div>
@@ -166,8 +213,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		       	  @foreach($products as $product)
 		        	
 				   <div class="grid_1_of_4 images_1_of_4 products-info" style="margin-left:5%;">
-					<a href="{{url('view_detail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
-					 <h3><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a></h3>
+					<a href="{{url('viewDetail/'.$product->id)}}"> <img src="web/images/slide/{{$product->image}}" alt="{{$product->name}}"></a>
+					 <h3><a href="{{url('viewDetail/'.$product->id)}}">{{$product->name}}</a></h3>
 
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 
@@ -183,8 +230,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			@endif
 
 			</div>
+                 <div class="row">{{$products->links()}}</div>
 		    
 		    	</div>
+		    	
 		    	<div class="content-sidebar">
 		    		<h4>Hãng Sản Xuất</h4>
 		    		 
@@ -245,4 +294,3 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</body>
 </html>
 
-S

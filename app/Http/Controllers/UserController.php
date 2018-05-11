@@ -8,7 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ChangePassRequest;
-
+use DB;
 
 class UserController extends Controller
 {
@@ -61,6 +61,11 @@ class UserController extends Controller
         $user->update($data);
         return back()->with('success', 'Bạn đã thay đổi mật khẩu thành công');
     }
+
+    public function forgetPass()
+    {
+        return view('auth.passwords.email');
+    }
     public function getUpdate()
     {
         $user = Auth::user();
@@ -103,6 +108,9 @@ class UserController extends Controller
     public function delete($id)
     {
         $user = User::findOrFail($id);
+        if(count($user->orders)>0){
+            return back()->with('success','Không thể xóa');
+        }
         $user->delete();
         return back();
     }
@@ -118,4 +126,5 @@ class UserController extends Controller
         $user->update($data);
         return back()->with('edit','Bạn Sửa Thành Công');
     }
+    
 }

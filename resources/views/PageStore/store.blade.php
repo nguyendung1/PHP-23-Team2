@@ -25,28 +25,39 @@
 		   @foreach($products as $product)	
 
 			<li id="1">
-				<a href="{{url('view_detail/'.$product->id)}}"><img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$product->image}}" /></a>
+				<a href="{{url('viewDetail/'.$product->id)}}"><img src="{{asset('web/images')}}/{{$category->name}}/{{$product->image}}" class="items" alt="{{$product->image}}" /></a>
 				
 				<br clear="all" />
-				<div><a href="{{url('view_detail/'.$product->id)}}">{{$product->name}}</a><br><br>
+				<div><a href="{{url('viewDetail/'.$product->id)}}">{{$product->name}}</a><br><br>
 					<p>{{number_format($product->price)}} VND</p><br>	
 					<p><strong style="background-color: green; color:white; border-radius: 5px;padding:0 2px;">{{$product->quality}}<i class="fa fa-star"></i></strong></p> 
                      
                      
 				</div>
 		   	</li>
-		   	@endforeach
 
-		   	@endif    		
+		   	@endforeach
+            
+             
+		   	@endif 
+
 		</ul>
 
+@if(isset($products)) <div class="w3-container"><div class="row">{{$products->links()}}</div>@endif
+
 	</div>
+
 	 
 		
 </div>
 
+
 </div>
+
 </div>
+
+
+
  
 		    	<div class="content-sidebar">
 		    		<h4>Hãng Sản Xuất</h4>
@@ -64,18 +75,19 @@
 
 							<li><h3>Mức Giá</h3></li>
 							
-							<li><a href="{{url('duoi_1_trieu')}}">Dưới 1 triệu</a></li>
-							<li><a href="{{url('1_den_3_trieu')}}">Từ 1-3 triệu</a></li>
-							<li><a href="{{url('3_den_6_trieu')}}">Từ 3-6 triệu</a></li>
-							<li><a href="{{url('6_den_10_trieu')}}">Từ 6-10 triệu</a></li>
-							<li><a href="{{url('10_den_15_trieu')}}">Từ 10-15 triệu</a></li>
-							<li><a href="{{url('tren_15_trieu')}}">Trên 15 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/500000/1000000')}}">Dưới 1 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/1000000/3000000')}}">Từ 1-3 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/3000000/6000000')}}">Từ 3-6 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/6000000/10000000')}}">Từ 6-10 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/10000000/15000000')}}">Từ 10-15 triệu</a></li>
+							<li><a href="{{url('searchFollowPrice/15000000/50000000')}}">Trên 15 triệu</a></li>
 						</ul>	
 				  		
 		    	</div>
 		    </div>
 		    <div class="clear"> </div>
 		    </div>
+
      </main>
 	@stop
 

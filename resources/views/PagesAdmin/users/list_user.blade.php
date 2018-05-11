@@ -8,10 +8,16 @@
                             List Customer
                         </h1>
                     </div>
+                   
                     <!-- /.col-lg-12 -->
                    <form action="{{url('admin/user/list_user')}}" method="get" role="search">
-                    
+                         
                         <div class="form-group">
+                            @if (Session::has('success'))
+                            <div class="alert alert-danger">
+                              {{ Session::get('success') }}
+                            </div>
+                            @endif
                             <input class="form-control" style="width:20em" id="date" type="date" value="@if(!empty($date)) {{$date}} @endif" name="date" >
                             <div class="space20">&nbsp;</div>
                             <input class="form-control" value="@if(!empty($search)){{$search}} @endif" name="search" placeholder="Type Name or Email">
@@ -31,6 +37,7 @@
                                 <th>Address</th>
                                 <th>Phone Number</th>
                                 <th>Level</th>
+                                <th>Order</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
@@ -38,7 +45,7 @@
                         <tbody>
                         @foreach($users as $user)
                         <?php 
-                            if($user->is_admin == 0){
+                            if($user->is_admin == 1){
                                 $role = "Admin";
                             }else{
                                 $role = "Member";
@@ -52,6 +59,7 @@
                                 <td>{{$user->address}}</td>
                                 <td>{{$user->phone_number}}</td>
                                 <td>{{$role}}</td>
+                                <td><a href="url('')">Detail</a></td>
                                 <td class="center"><a href="{{url('admin/user/delete/' . $user->id)}}"><i class="fa fa-trash-o  fa-fw"></i></a></td>
                                 <td class="center"><a href="{{url('admin/user/edit_user/' . $user->id)}}"><i class="fa fa-pencil fa-fw"></i> </a></td>
                             </tr>

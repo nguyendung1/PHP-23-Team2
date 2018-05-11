@@ -39,10 +39,16 @@
                                 @endif
                             </div>
                             <div class="form-block">
-                                <label for="phone">Điện thoại:</label>
-                                <input type="text" class="form-control" id="phone" name="phone_number" value="{{$user->phone_number}}">
+                                <label for="phone">Phone Number:</label>
+                                <input type="text" class="form-control" id="phone" name="phone_number" value="{{$user->phone_number}}" placeholder="Please Enter Phone">
                                 @if($errors->has('phone_number'))
                                     <p  class="text-danger">{{$errors->first('phone_number')}}</p>
+                                @endif
+                            </div><div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Please Enter Password" value="{{$user->password}}" />
+                                @if($errors->has('password'))
+                                <p  class="text-danger">{{$errors->first('password')}}</p>
                                 @endif
                             </div>
                             <div class="form-group">

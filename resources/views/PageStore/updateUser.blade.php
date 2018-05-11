@@ -23,13 +23,13 @@
 						<div class="space20">&nbsp;</div>
 							
 						<div class="form-block">
-							<label for="email">Địa chỉ email: </label>
+							<label for="email">Email: </label>
 							<span style="padding:5px">{{$user->email}}</span>
 
 						</div>
 
 						<div class="form-block">
-							<label for="your_last_name">Tên đầy đủ: </label>
+							<label for="your_last_name">Tên tài Khoản: </label>
 							<input type="text" class="form-control" id="your_last_name" name="name" value="{{$user->name}}" >
 						</div>
 

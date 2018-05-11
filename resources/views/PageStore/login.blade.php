@@ -33,8 +33,9 @@
       </div>
       <div class="col-md-6">
           <div class="form-check">
+              
               <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                <a href="{{url('forgetPass')}}">Quên Password</a>
               </label>
           </div>
       </div>

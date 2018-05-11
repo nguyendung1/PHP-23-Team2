@@ -12,7 +12,6 @@
 						<tr>
 							<th class="product-name">Mã Hàng</th>
 							<th class="product-name">Tên Khách Hàng</th>
-							<th class="product-quantity">Số Lượng</th>
 							<th class="product-subtotal">Tổng tiền</th>
 							<th class="product-remove">Trạng thái</th>
 							<th>Chi Tiết</th>
@@ -46,16 +45,10 @@
 							</td>
 							<td class="product-name">
 								<div class="media-body">
-										<p class="font-large table-title">{{$order->user->name}}</p>
+										<p class="font-large table-title">{{$order->name}}</p>
 										
 								</div>
 							</td>	
-
-							
-							<td class="product-quantity">
-								<input type="text" name="quantity" value="{{$order->quantity}}" size="1" style="text-align: center;">
-							</td>
-
 							<td class="product-subtotal">
 								<span class="amount">{{number_format($order->total)}}</span>
 							</td>

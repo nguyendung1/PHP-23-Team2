@@ -4,7 +4,7 @@
    $user = Auth::user();
 ?>
 {!! Form::open(['url' => 'admin/changePass', 'method' => 'post','files'=>true,'id'=>'profile-form']) !!}
-<h2 style="margin-left: 30%;" >Thông Tin Tài Khoản</h2>
+<h2 style="margin-left: 30%;" >Đổi Password</h2>
 <div class="col-md-12">  
           <div class="form-group text-center">
           @if (Session::has('success'))
@@ -18,7 +18,7 @@
 <div class="content" style="margin-left: 30%;">
         <input type="hidden" name="email" value="@if(!empty($user)){{$user->email}}@endif">
         <div>
-            <label for="">Tài khoản: </label> <span style="padding:5px">{{$user->name}}</span>
+            <label for="">Tên tài khoản: </label> <span style="padding:5px">{{$user->name}}</span>
         </div> 
         <div>
             <label for="">Email: </label> <span style="padding:5px">{{$user->email}}</span>

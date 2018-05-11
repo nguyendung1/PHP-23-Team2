@@ -39,8 +39,8 @@
                                 @endif
                             </div>
                             <div class="form-block">
-                                <label for="phone">Điện thoại:</label>
-                                <input type="text" class="form-control" id="phone" name="phone_number" >
+                                <label for="phone">Phone Number:</label>
+                                <input type="text" class="form-control" id="phone" name="phone_number" placeholder="Please Enter Phone" >
                                 @if($errors->has('phone_number'))
                                     <p  class="text-danger">{{$errors->first('phone_number')}}</p>
                                 @endif
@@ -62,10 +62,10 @@
                             <div class="form-group">
                                 <label>User Level</label>
                                 <label class="radio-inline">
-                                    <input name="is_admin" value="0" type="radio">Admin
+                                    <input name="is_admin" value="1" type="radio">Admin
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="is_admin" value="1" checked="" type="radio">Member
+                                    <input name="is_admin" value="0" checked="" type="radio">Member
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-default">User Add</button>
