@@ -8,7 +8,7 @@
 <div class="col-md-12">  
           <div class="form-group text-center">
           @if (Session::has('success'))
-              <div class="alert alert-danger" ">
+              <div class="alert alert-success" ">
                   {{ Session::get('success') }}
               </div>
           @endif

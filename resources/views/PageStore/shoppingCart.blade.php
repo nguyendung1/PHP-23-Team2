@@ -57,7 +57,7 @@
 								{!! $status !!}
 							</td>
 							<td class="product-remove">
-								<a href="{{url('chitiet/'.$order->id)}}">CHI TIẾT</a>
+								<a href="{{url('chitiet/'.$order->id)}}" style="font-size:1em">view</a>
 							</td>
 						
 						</tr>
@@ -69,18 +69,6 @@
 				</table>
 				<!-- End of Shop Table Products -->
 			</div>
-
-
-			<!-- Cart Collaterals -->
-			<!-- <div class="cart-collaterals">
-
-				<div class="cart-totals pull-right">
-					<div class="cart-totals-row"><span style="color:red">Order Total:</span> <span style="color:red">$188.00</span></div>
-				</div>
-
-				<div class="clearfix"></div>
-			</div> -->
-			<!-- End of Cart Collaterals -->
 			<div class="clearfix"></div>
 
 		</div> <!-- #content -->

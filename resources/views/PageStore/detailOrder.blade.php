@@ -24,15 +24,11 @@
 						 $i = 1; ?>
 
 						@foreach($order_detail as $detail )
-						<?php 
-							$categoryName = DB::table('categories')->where('id',$detail->product->category_id)->first();
-							$linkImage = 'http://localhost:8000/web/'.'images/'.$categoryName->name.'/'.$detail->product->image;
-
-						?>
+	
 						 <tr>
 						 	<td>{{$i}}</td>
 						 	<td>{{$detail->product->name}}</td>
-				 			<td><img height="100px" src="{{$linkImage}}"></td>
+				 			<td><img height="100px" src="{{asset('web/images/total')}}/{{$detail->product->image}}"></td>
 						 	<td>{{$detail->quantity}}</td>
 						 	<td>{{number_format($detail->price)}}</td>
 						 </tr>	

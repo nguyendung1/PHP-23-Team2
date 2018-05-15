@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ChangePassRequest;
+use App\Http\Requests\UpdateUserRequest;
 use DB;
 
 class UserController extends Controller
@@ -40,7 +41,7 @@ class UserController extends Controller
         if(Auth::attempt($data)){
             return redirect('/');
         }
-            return back()->with('success','Vui Lòng Nhập Tài Khoản');   
+            return back()->with('error','Vui Lòng Nhập Tài Khoản');   
     }
 
     public function logout()
@@ -72,7 +73,7 @@ class UserController extends Controller
         return view('PageStore.updateUser',compact('user'));
     }
 
-    public function Update(Request $request)
+    public function Update(UpdateUserRequest $request)
     {
         $user = User::where('email', $request->email)->first();
         $data = $request->all();

@@ -18,7 +18,7 @@ Route::get('store/{id}', 'ProductsController@store');
 Route::get('search', 'ProductsController@searchProduct');
 
 //tim tren gia tien
-Route::get('searchFolice/{price1}/{price2}', 'ProductsController@searchFollowPrice');
+Route::get('searchFollowPrice/{price1}/{price2}', 'ProductsController@searchFollowPrice');
 //view detail
 Route::get('viewDetail/{id}', 'ProductsController@viewDetail');
 
@@ -30,6 +30,16 @@ Route::group(['prefix' => 'admin'], function()
 		Route::get('/pending_order', 'ProductsController@PendingOrder');
 		Route::post('/search', 'ProductsController@SearchAdmin');
 	});	
+	Route::group(['prefix' => 'product'], function(){
+		Route::get('product_list', 'ProductsController@ListProduct');
+		Route::get('product_update/{id}', 'ProductsController@UpdateProduct');
+		Route::post('product_update/{id}', 'ProductsController@SaveUpdateProduct');
+		Route::get('product_add', 'ProductsController@AddProduct');
+		Route::post('product_add', 'ProductsController@SaveAddProduct');
+		Route::post('/search_product', 'ProductsController@SearchProductAdmin');
+		Route::get('/delete/{id}', 'ProductsController@DeleteProduct');
+	});
+
 
 	Route::group(['prefix' => 'user'], function(){
 		Route::get('/add_user','UserController@getUser');
@@ -68,7 +78,7 @@ Route::get('dangxuat','UserController@logout');
 Route::get('update/{$id}','UserController@getUpdate')->middleware('auth');
 Route::post('update/','UserController@Update');
 
-Route::get('forgetPass','UserController@forgetPass');
+Route::get('forgotPass','UserController@forgetPass');
 
 
 Route::get('admin/changePass','UserController@getChangePass');

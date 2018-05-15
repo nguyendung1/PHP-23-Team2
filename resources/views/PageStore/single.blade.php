@@ -298,22 +298,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="footer">
 			<div class="wrap">
 			<div class="section group">
-				<div class="col_1_of_4 span_1_of_4">
-					<h3>Our Info</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+			<div class="col_1_of_4 span_1_of_4" >
+					<h3>Thông Tin Của Chúng Tôi</h3>
+					<p style="color: white;">Là một thành viên tự hào của gia đình MobileLowLab, bạn không phải đi ra khỏi con đường của bạn tìm thấy chúng tôi - chỉ cần tìm chúng tôi nơi các sản phẩm Mobile được bán. Chúng tôi có 100 địa điểm ở Việt Nam,Công Ty san xuất và phân phối đặt trụ sớ tại Singapore.</p>
+				</div>
+				<div class="col_1_of_4 span_1_of_4" >
+					<h3>Hướng Dẫn Mua Hàng</h3>
+					<p style="color: white;">Hướng dẫn mua hàng online.</p>
+					<p style="color: white;">Hướng dẫn mua hàng trả góp.</p>
+					<p style="color: white;">Chính sách đổi trả / bảo hành.</p>
 				</div>
 				<div class="col_1_of_4 span_1_of_4">
-					<h3>Latest-News</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h3>Store Location</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<h3>Vị Trí Cửa Hàng</h3>
+					<p style="color: white;"><a href="{{url('blog')}}">Nhấn Vào đây để Hiển Thị Của Hàng Gần Bạn Nhất</a></p>
 					<h3>Order-online</h3>
-					<p>080-1234-56789</p>
-					<p>080-1234-56780</p>
+					<p style="color: white;">080-1234-56789</p>
+					<p style="color: white;">080-1234-56780</p>
 				</div>
 				<div class="col_1_of_4 span_1_of_4 footer-lastgrid">
 					<h3>News-Letter</h3>
@@ -326,6 +326,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					 </ul>
 				</div>
 			</div>
+		</div>
+		
+		<div class="clear"> </div>
+		<div class="wrap">
+		<div class="copy-right">
+			<p>Mobilestore  &#169	 All Rights Reserved | Design By <a href="http://w3layouts.com/">W3Layouts</a></p>
+		</div>
 		</div>
 		</div>
 	</body>

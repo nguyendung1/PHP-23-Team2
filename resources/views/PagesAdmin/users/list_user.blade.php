@@ -7,20 +7,23 @@
                         <h1 class="page-header">
                             List Customer
                         </h1>
-                    </div>
-                   
-                    <!-- /.col-lg-12 -->
-                   <form action="{{url('admin/user/list_user')}}" method="get" role="search">
-                         
                         <div class="form-group">
                             @if (Session::has('success'))
                             <div class="alert alert-danger">
                               {{ Session::get('success') }}
                             </div>
                             @endif
-                            <input class="form-control" style="width:20em" id="date" type="date" value="@if(!empty($date)) {{$date}} @endif" name="date" >
+                        </div>
+                    </div>
+                        
+                    <!-- /.col-lg-12 -->
+                   <form action="{{url('admin/user/list_user')}}" method="get" role="search">
+                         
+                        <div class="form-group">
+                            
+                            <input class="form-control" style="width:20em" id="date" type="date" value="" name="date" >
                             <div class="space20">&nbsp;</div>
-                            <input class="form-control" value="@if(!empty($search)){{$search}} @endif" name="search" placeholder="Type Name or Email">
+                            <input class="form-control" value="" name="search" placeholder="Type Name or Email">
                         </div>
                             <button type="submit" class="btn btn-default">Search</button>
                             
@@ -45,7 +48,7 @@
                         <tbody>
                         @foreach($users as $user)
                         <?php 
-                            if($user->is_admin == 1){
+                            if($user->is_admin == 0){
                                 $role = "Admin";
                             }else{
                                 $role = "Member";

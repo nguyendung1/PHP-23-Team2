@@ -45,7 +45,7 @@
 		</script>
 
 		<style type="text/css">
-				  .header-top-nav  ul
+				 .header-top-nav  ul
 		  	  {
                    list-style-type: none;
                    position: relative;
@@ -54,14 +54,13 @@
 
 		  	  }
 		  	  .header-top-nav ul li a{
-                   display: block;      
-                           
-		  	  }
-		  	  
+                   display: block;
+                   width: 90px;
+		  	  } 
 		  	   .header-top-nav ul ul{
                    display: none;
                    position: absolute;
-                   top: 100%;
+                   top: 99%;
                    background-color:white;
 
 		  	  } 
@@ -76,6 +75,8 @@
 		  	   	content: "";
 		  	   	clear: both;
 		  	   }
+
+		  	   
 		</style>
      
 	</head>
@@ -102,11 +103,13 @@
 					 	</span></a></li>
 					
 					@if(Auth::check())	
-					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
+					<li><a href="{{url('/')}}">Chào!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
 						 <ul>
-			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
-			  			    @if(Auth::user()->is_admin==1)
+			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin</a></li>
+			  			    @if(Auth::user()->is_admin==0)
 				  			    <li><a href="{{url('admin/home')}}">Quản Trị</a></li>
+				  				@else
+				  				<li><a href="{{'shopping'}}">Đơn Hàng</a></li>	
 							@endif
 			  			    <li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
 			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>

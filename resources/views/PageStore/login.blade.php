@@ -3,9 +3,9 @@
 <h2 style="margin-left: 30%;" >Đăng Nhập Ngay!</h2>
       <div class="col-md-12">  
           <div class="form-group text-center">
-          @if (Session::has('success'))
+          @if (Session::has('error'))
               <div class="alert alert-danger" ">
-                  {{ Session::get('success') }}
+                  {{ Session::get('error') }}
               </div>
           @endif
           </div><!-- form-group -->
@@ -35,7 +35,7 @@
           <div class="form-check">
               
               <label class="form-check-label">
-                <a href="{{url('forgetPass')}}">Quên Password</a>
+                <a href="{{url('forgotPass')}}" style="color: blue">Quên Tài Khoản</a>
               </label>
           </div>
       </div>

@@ -45,11 +45,6 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
                             <li><a href="{{url('dangxuat')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
@@ -90,26 +85,24 @@
                         </li>
 
                         <li>
-                            <a href="#"><i class="fas fa-cart-plus"></i> Order List<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="admin/order/order_list">List Order</a>
-                                    <a href="admin/order/pending_order">Pending Order</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-cube fa-fw"></i> LoaiTin<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="admin/LoaiTin/list">List Product</a>
-                                </li>
-                                <li>
-                                    <a href="admin/LoaiTin/create">Add Product</a>
-                                </li>
-                            </ul>
+                                <a href="#"><i class="fas fa-cart-plus"></i> Order<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="admin/order/order_list">List Order</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="admin/product/product_list">List Product</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/product/product_add">Add Product</a>
+                                    </li>
+                                </ul>
                             <!-- /.nav-second-level -->
                         </li>
 

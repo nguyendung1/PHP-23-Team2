@@ -63,12 +63,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  	  }
 		  	  .header-top-nav ul li a{
                    display: block;
-                   width: 110px;
+                   width: 90px;
 		  	  } 
 		  	   .header-top-nav ul ul{
                    display: none;
                    position: absolute;
-                   top: 100%;
+                   top: 99%;
                    background-color:white;
 
 		  	  } 
@@ -115,13 +115,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				
 					
 			          @if(Auth::check())	
-						<li><a href="{{url('shopping')}}">Chào bạn ! {{Auth::user()->name}}</a>
-                             <ul>							
-					  			<li><a href="{{url('admin/changePass')}}">Tài Khoản Của Tôi</a></li>
-					  			@if(Auth::user()->is_admin==1)
-				  			    <li><a href="{{url('admin/home')}}">Quản Trị</a></li>
+						<li><a href="{{url('/')}}">Chào!<img src="{{asset('web/images/slide/admin1.png')}}"> {{Auth::user()->name}}</a>
+                             <ul>
+					  			<li><a href="{{url('update/{$id}')}}">Thông Tin</a></li>
+					  			@if(Auth::user()->is_admin==0)
+					  			    <li><a href="{{url('admin/home')}}">Quản Trị</a></li>
+					  			    @else
+					  				<li><a href="{{'shopping'}}">Đơn Hàng</a></li>	
 				  			  	@endif
-					  			<li><a href="{{url('update/{$id}')}}">Đổi Password</a></li>
+					  			<li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
 					  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
 					  		</ul>
 							
@@ -219,7 +221,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 
 					 <ul>
-					 	<li><a  class="cart" href="single.html"> </a></li>
+					 	<li><a  class="cart" href="{{url('viewDetail/'.$product->id)}}" > </a></li>
 					 	<li><a  class="i" href="single.html"> </a></li>
 					 	<li><a  class="Compar" href="single.html"> </a></li>
 					 	<li><a  class="Wishlist" href="single.html"> </a></li>

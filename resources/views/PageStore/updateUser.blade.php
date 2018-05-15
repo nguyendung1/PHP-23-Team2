@@ -25,17 +25,23 @@
 						<div class="form-block">
 							<label for="email">Email: </label>
 							<span style="padding:5px">{{$user->email}}</span>
-
+							
 						</div>
 
 						<div class="form-block">
 							<label for="your_last_name">Tên tài Khoản: </label>
 							<input type="text" class="form-control" id="your_last_name" name="name" value="{{$user->name}}" >
+							@if($errors->has('name'))
+				                <p class="control text-danger">{{$errors->first('name')}}</p>
+				            @endif
 						</div>
 
 						<div class="form-block">
 							<label for="address">Địa chỉ:</label>
 							<input type="text" class="form-control" id="address" name="address" value="{{$user->address}}">
+							@if($errors->has('address'))
+				                <p class="control text-danger">{{$errors->first('address')}}</p>
+				            @endif
 							
 						</div>
 
@@ -43,6 +49,9 @@
 						<div class="form-block">
 							<label for="phone">Điện thoại:</label>
 							<input type="text" class="form-control" id="phone" name="phone_number" value="{{$user->phone_number}}" >
+							@if($errors->has('phone_number'))
+				                <p class="control text-danger">{{$errors->first('phone_number')}}</p>
+				            @endif
 							
 						</div>
 						

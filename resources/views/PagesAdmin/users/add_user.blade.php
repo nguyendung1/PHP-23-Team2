@@ -16,7 +16,7 @@
                             <div class="alert alert-success">
                               {{ Session::get('success') }}
                             </div>
-                        @endif
+                            @endif
                         </div>
                         <form action="{{url('admin/user/add_user')}}" method="POST">
                         	<input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -62,10 +62,10 @@
                             <div class="form-group">
                                 <label>User Level</label>
                                 <label class="radio-inline">
-                                    <input name="is_admin" value="1" type="radio">Admin
+                                    <input name="is_admin" value="0" type="radio">Admin
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="is_admin" value="0" checked="" type="radio">Member
+                                    <input name="is_admin" value="1" checked="" type="radio">Member
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-default">User Add</button>

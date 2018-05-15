@@ -63,7 +63,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    	         	-->
 		    	         		<tr>
 		    	         			<td>Tạm Tính : </td>
-		    	         			<td>{{number_format($item->subtotal)}} <sup><u>đ</u></sup></td>
+		    	         			<td>{{Cart::subtotal()}} <sup><u>đ</u></sup></td>
 		    	         		</tr>
 		    	         		<tr>
 		    	         			<td>Phí Vận Chuyển : </td>
@@ -71,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    	         		</tr>
 		    	         		<tr>
 		    	         			<td>Thành Tiền : </td>
-		    	         			<td class="w3-text-red">{{number_format($item->subtotal)}} <sup><u>đ</u></sup></td>
+		    	         			<td class="w3-text-red">{{Cart::subtotal()}} <sup><u>đ</u></sup></td>
 		    	         		</tr>
 		    	         		<tr>
 		    	         			<td><a class="btn btn-danger"  href="#">Tiến Hành Đặt Hàng</a></td>

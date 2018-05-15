@@ -56,8 +56,8 @@ class CartController extends Controller
        $data['phone_number'] = $request->phone_number;
        $data['user_id']   = Auth::user()->id; 
        $data['date_order'] = $request->date_order;
-       $data['status'] = 1;
-       $data['total'] = str_replace(',','',Cart::total());
+       $data['status'] = 2;
+       $data['total'] = str_replace(',','',Cart::subtotal());
        
        $order = Order::create($data);   
        $carts = Cart::content();
@@ -67,11 +67,10 @@ class CartController extends Controller
          $data['order_id'] = $order->id;
          $data['product_id'] = $item->id;
          $data['price'] = str_replace(',','',$item->price);
-         OrderDetail::create($data);
-        Cart::destroy();
-          
-        return back()->with('success','Đặt Hàng Thành Công');   
+         OrderDetail::create($data);   
        }
+       Cart::destroy();     
+      return back()->with('success','Đặt Hàng Thành Công');
     }
 
     return back()->with('status','Vui Lòng Đăng Nhập Trước Khi Đặt Hàng');

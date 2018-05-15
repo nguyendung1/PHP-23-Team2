@@ -44,14 +44,6 @@
                                 @if($errors->has('phone_number'))
                                     <p  class="text-danger">{{$errors->first('phone_number')}}</p>
                                 @endif
-                            </div><div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Please Enter Password" value="{{$user->password}}" />
-                                @if($errors->has('password'))
-                                <p  class="text-danger">{{$errors->first('password')}}</p>
-                                @endif
-                            </div>
-                            <div class="form-group">
                                 <label>User Level</label>
                                 <label class="radio-inline">
                                     <input name="is_admin" value="0" type="radio">Admin
