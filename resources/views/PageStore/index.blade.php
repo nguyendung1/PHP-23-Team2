@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<head>
 		<meta charset="utf-8">
 		<title>Mobilestore Website Template | Home :: W3layouts</title>
-		
+		<base href="{{asset('')}}">
 		<link href="{{asset('web/styles/style2.css')}}" rel="stylesheet" type="text/css"  media="all" />
 		<meta name="keywords" content="Mobilestore iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
@@ -63,19 +63,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  	  }
 		  	  .header-top-nav ul li a{
                    display: block;
-		  	  }
-		  	   .header-top-nav ul li a{
-                   display: block;
-
+                   width: 90px;
 		  	  } 
-		  	   .header-top-nav ul li a{
-                   display: block;
-               
-		  	  }   
 		  	   .header-top-nav ul ul{
                    display: none;
                    position: absolute;
-                   top: 100%;
+                   top: 99%;
                    background-color:white;
 
 		  	  } 
@@ -91,6 +84,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  	   	clear: both;
 		  	   }
 
+
+		  	  
+		  	  
+
+
 		  </style>
 	</head>
 	<body>
@@ -105,7 +103,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</form>
 			</div>
 			<div class="clear"> </div>
-			<div class="header-top-nav">
+			<div class="header-top-nav" >
 				<ul>
 					<li><a href="#">Phát Triển</a></li>
 					<li><a href="#">Thanh Toán</a></li>
@@ -114,15 +112,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					 	 <li><a href="{{url('shoppingCart')}}"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>    <span style="color:white;background-color:orange;border-radius:40%; font-size:1.5em;padding:1px 3px;">@if (Cart::content()){{count(Cart::content())}}@else (Trống) @endif </span></a></li>
 					 	 
 					 	</span></a></li>
+				
 					
-					@if(Auth::check())	
-					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
-						 <ul>
-			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
-			  			    <li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
-			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
-			  			 </ul>  
-			  		</li>
+			          @if(Auth::check())	
+						<li><a href="{{url('/')}}">Chào!<img src="{{asset('web/images/slide/admin1.png')}}"> {{Auth::user()->name}}</a>
+                             <ul>
+					  			<li><a href="{{url('update/{$id}')}}">Thông Tin</a></li>
+					  			@if(Auth::user()->is_admin==0)
+					  			    <li><a href="{{url('admin/home')}}">Quản Trị</a></li>
+					  			    @else
+					  				<li><a href="{{'shopping'}}">Đơn Hàng</a></li>	
+				  			  	@endif
+					  			<li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
+					  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+					  		</ul>
+							
+						</li>
+		  			
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
 					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
@@ -132,6 +138,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</ul>
 			</div>
 			<div class="clear"> </div>
+
 		</div>
 		</div>
 		<div class="clear"> </div>
@@ -145,15 +152,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!----start-top-nav---->
 		<div class="top-nav">
 			<ul>
-				 <li><a href="{{url('/')}}">Trang Chủ</a></li>
+				<li><a href="{{url('/')}}">Trang Chủ</a></li>
 				<li><a href="{{url('about')}}">Giới Thiệu</a></li>
-				
 				<li><a href="#">Đặc Trưng</a></li>
 				<li><a href="{{url('blog')}}">Blog</a></li>
 				<li><a href="{{url('contact')}}">Liên Hệ</a></li>
 			</ul>
 		</div>
 		<div class="clear"> </div>
+
+
+
+
+
 		</div>
 		</div>
 		<!----End-top-nav---->
@@ -210,7 +221,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					 <h3>{{number_format($product->price)}} VND</h3>
 					 
 					 <ul>
-					 	<li><a  class="cart" href="single.html"> </a></li>
+					 	<li><a  class="cart" href="{{url('viewDetail/'.$product->id)}}" > </a></li>
 					 	<li><a  class="i" href="single.html"> </a></li>
 					 	<li><a  class="Compar" href="single.html"> </a></li>
 					 	<li><a  class="Wishlist" href="single.html"> </a></li>
@@ -285,4 +296,3 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</body>
 </html>
 
-S

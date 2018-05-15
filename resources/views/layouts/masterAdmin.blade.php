@@ -45,12 +45,7 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="admin/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="{{url('dangxuat')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -68,14 +63,28 @@
                                     <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                     </button>
-                                    </span>
-                                </div>
-                                <!-- /input-group -->
-                            </li>
-                            <li>
-                                <a href="admin/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                            </li>
-                            <li>
+
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="admin/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-cart-plus"></i> TheLoai<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/TheLoai/list">List Category</a>
+                                </li>
+                                <li>
+                                    <a href="admin/TheLoai/create">Add Category</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
                                 <a href="#"><i class="fas fa-cart-plus"></i> Order<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -94,37 +103,37 @@
                                         <a href="admin/product/product_add">Add Product</a>
                                     </li>
                                 </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-cube fa-fw"></i>TinTuc<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="admin/TinTuc/list">List Product</a>
-                                    </li>
-                                    <li>
-                                        <a href="admin/TinTuc/create">Add Product</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="admin/TheLoai/list">List User</a>
-                                    </li>
-                                    <li>
-                                        <a href="admin/TheLoai/create">Add User</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.sidebar-collapse -->
-                </div>
-                <!-- /.navbar-static-side -->
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-cube fa-fw"></i>TinTuc<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/TinTuc/list">List Product</a>
+                                </li>
+                                <li>
+                                    <a href="admin/TinTuc/create">Add Product</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+
+
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('admin/user/list_user')}}">List User</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('admin/user/add_user')}}">Add User</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
             </nav>
             @yield('content')
         </div>

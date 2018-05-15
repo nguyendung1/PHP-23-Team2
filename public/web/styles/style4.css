@@ -1,0 +1,94 @@
+table.shop_table {
+border:1px solid #f1f1f1;
+margin:0 -1px 24px 0;
+text-align:left;
+width:100%;
+border-collapse:separate
+}
+
+table.shop_table th {
+line-height:55px;
+text-align:center;
+height:55px;
+background-color:#94CB32;
+font-size:18px;
+font-family:Open Sans;
+border-right:1px solid #eee
+}
+
+table.shop_table td {
+border-top:1px solid #f1f1f1;
+border-right:1px solid #f1f1f1;
+padding:38px;
+text-align:center;
+vertical-align:middle
+}
+table.beta-shopping-cart-table .product-thumbnail {
+min-width:32px
+}
+
+table.beta-shopping-cart-table th,table.beta-shopping-cart-table td {
+vertical-align:middle
+}
+
+table.beta-shopping-cart-table a.remove i {
+color:#6a6a6a;
+font-size:17px
+}
+
+table.beta-shopping-cart-table a.remove:hover i {
+color:#f90
+}
+
+table.beta-shopping-cart-table td.actions .coupon .input-text {
+float:left;
+-webkit-box-sizing:border-box;
+-moz-box-sizing:border-box;
+box-sizing:border-box;
+padding:6px 6px 5px;
+margin:0 4px 0 0;
+outline:0;
+line-height:1em
+}
+
+table.beta-shopping-cart-table input {
+margin:0;
+vertical-align:middle;
+line-height:1em
+}
+cart-totals {
+width:270px;
+text-align:center;
+border:1px solid #e8e8e8;
+margin-top:25px
+}
+
+.cart-totals-row {
+height:55px;
+line-height:55px;
+border-top:1px solid #e8e8e8;
+font-size:18px;
+text-align:left
+}
+
+.cart-totals .cart-totals-row:first-child {
+background-color:#fdfdfd;
+border-top:none
+}
+
+.cart-totals-row span:first-child {
+padding:0 20px
+}
+
+.cart-totals-row span:last-child {
+color:#a3a2a2
+}
+
+.cart-total-title {
+background-color:#fdfdfd;
+color:#000;
+font-size:22px;
+line-height:55px;
+margin-bottom:0;
+text-align:center
+}
