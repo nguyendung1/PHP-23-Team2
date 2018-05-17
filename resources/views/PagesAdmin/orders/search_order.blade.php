@@ -26,9 +26,9 @@
                     <tr align="center">
                         <th>ID of Order</th>
                         <th>Name</th>
-                        <th>Product ID</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Total</th>
                         <th>Status</th>
                         <th>Order Date</th>
                         <th>Action</th>
@@ -43,9 +43,9 @@
                         @else
                         <td>{{$od->user->name}}</td>
                         @endif
-                        <td>{{$od->order_detail->product_id}}</td>
-                        <td>{{$od->order_detail->quantity}}</td>
-                        <td>{{$od->order_detail->price}}</td>
+                        <td>{{$od->phone_number}}</td>
+                        <td>{{$od->address}}</td>
+                        <td>{{$od->total}}</td>
                         <td>
                             @if($od->status == '1')
                             {{"Complete"}}
@@ -54,7 +54,7 @@
                             @endif
                         </td>
                         <td>{!! ChangeColor($od->date_order,$search) !!}</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/order/delete/{{$od->id}}"> Cancel Order</a></td>
+                        <td class="center"><a href="admin/order/order_list/{{$od->id}}"> Detail Order</a></td>
                     </tr>
                     @endforeach
                 </tbody>

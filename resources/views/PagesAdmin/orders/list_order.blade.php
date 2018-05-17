@@ -26,11 +26,9 @@
                     <tr align="center">
                         <th>ID of Order</th>
                         <th>Name</th>
-                        <th>Product ID</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
                         <th>Status</th>
                         <th>Order Date</th>
+                        <th>Detail</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,27 +36,23 @@
                     <tr class="odd gradeX" align="center">
                         <td>{{$od->id}}</td>
                         <td>{{$od->user->name}}</td>
-                        <td>{{$od->order_detail->product_id}}</td>
-                        <td>{{$od->order_detail->quantity}}</td>
-                        <td>{{$od->order_detail->price}}</td>
                         <td>
                             @if($od->status == '1')
                             {{"Complete"}}
-                            @else
+                            @elseif($od->status == '2')
                             {{"Pending"}}
+                            @else
+                            {{"Cancel"}}
                             @endif
                         </td>
                         <td>{{$od->date_order}}</td>
+                        <td class="center"><a href="admin/order/order_list/{{$od->id}}"> Detail Order</a></td>
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="6" align="center">All Price: </td>
-                        <td colspan="2" align="center">{{$value_price}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="6" align="center">All Quantity:</td>
-                        <td colspan="2" align="center">{{$value_quantity}}</td>
-                    </tr>
+                        <td colspan="3" align="center">All Price: </td>
+                        <td colspan="2" align="center">{{$valueTotal}}</td>
+                    </tr>                 
                 </tbody>
             </table>
         </div>

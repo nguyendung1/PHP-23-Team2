@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
@@ -16,7 +15,7 @@ use App\Comment;
 use Illuminate\Support\Facades\Auth;
 class ProductsController extends Controller
 {
-//Client Site
+ 
    //redirect view
     public function about()
     {
@@ -32,6 +31,7 @@ class ProductsController extends Controller
     {
         return view('PageStore.contact');
     }
+
 
     //show san pham
     public function index()
@@ -64,8 +64,12 @@ class ProductsController extends Controller
 
     //tiem san pham duoi tren gia tien
     //chung vao 1 funnction  nhan 2 param va sua lai ten 
-     public function searchFollowPrice($price1,$price2)
+     public function searchFollowPrice()
      {
+        
+         $prices = Input::all();
+         $price1 = $prices['price1'];
+         $price2 = $prices['price2']; 
          if ($price2 <= 1000000){
             $products = Product::where('price', '<', 1000000);
              
@@ -90,7 +94,7 @@ class ProductsController extends Controller
             $products = Product::where('price','>', $price1)->where('price', '<', $price2);
            
          }
-         $products = $products->paginate(12);
+         $products = $products->paginate(12)->appends($prices);
          return view('PageStore.search' , compact('products'));
 
      }
@@ -105,44 +109,23 @@ class ProductsController extends Controller
         return view('PageStore.single', compact('product', 'technology', 'category'));
     }
     
- //comment 
-
-    public function comment(Request $request)
-    {
-
-         if (Auth::check()) {
-             $data['name'] = Auth::user()->name;
-             $data['product_id'] = $request->id;
-             $data['content'] = $request->content;
-             $comments = Comment::create($data);
-             
-             
-             return back();       
-         }
-         return back()->with('status', 'Đăng nhập mới có thể bình luận.');
-
-    }
-
 //ADMIN SITE 
     
     //Order
-    public function ListOrder()
+    public function listOrder()
     {
         $order = Order::all();          
-        $value_price = OrderDetail::sum('price');
-        $value_quantity = OrderDetail::sum('quantity');
-        return view('PagesAdmin.orders.list_order', compact('order', 'value_price', 'value_quantity'));       
+        $valueTotal = Order::sum('total');
+        return view('PagesAdmin.orders.list_order', compact('order', 'valueTotal'));       
     }
 
-    public function PendingOrder()
+    public function detailOrder($id)
     {
-        $order = OrderDetail::where('status', 0)->get();
-        $value_price = OrderDetail::sum('price');
-        $value_quantity = OrderDetail::sum('quantity');        
-        return view('PagesAdmin.orders.pending_order', compact('order', 'value_price', 'value_quantity'));     
+        $order = Order::findOrFail($id);       
+        return view('PagesAdmin.orders.detail_order', compact('order'));
     }
 
-    public function SearchAdmin(Request $request)
+    public function searchAdmin(Request $request)
     {
         $search = $request->search;
         $user = User::where('name', '=', $search)->first();
@@ -151,7 +134,7 @@ class ProductsController extends Controller
             return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));
         }
         if ($search == 'Pending' or $search == 'pending'){
-            $order = OrderDetail::where('status', 0)->get();          
+            $order = Order::where('status', 2)->get();          
             return view('PagesAdmin.orders.pending_order', compact('order'));            
         }       
         if (empty($search)){
@@ -161,7 +144,7 @@ class ProductsController extends Controller
         return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));   
     }
 
-    public function DeleteOrder($id)
+    public function deleteOrder($id)
     {
         $order = Order::findorfail($id);
         $order->delete();
@@ -169,13 +152,13 @@ class ProductsController extends Controller
     } 
 
     //Product
-    public function ListProduct()
+    public function listProduct()
     {
         $products = Product::all();                    
         return view('PagesAdmin.product.list_product', compact('products'));
     }  
 
-    public function UpdateProduct($id)
+    public function updateProduct($id)
     {
         $product = Product::findOrFail($id);
         $category = Category::all();
@@ -183,7 +166,7 @@ class ProductsController extends Controller
     }
 
 
-    public function SaveUpdateProduct($id)
+    public function saveUpdateProduct($id)
     {
         $product = Product::findOrFail($id); 
         $data = Input::get();
@@ -191,14 +174,14 @@ class ProductsController extends Controller
         return redirect('admin/product/product_list')->with('thongbao_update','Update Successful');
     }
 
-    public function DeleteProduct($id)
+    public function deleteProduct($id)
     {
         $product = Product::findOrFail($id);
         $product->delete();
         return redirect('admin/product/product_list')->with('thongbao_delete', 'Delete Successful');
     }     
     
-    public function AddProduct()
+    public function addProduct()
     {
         $product = Product::all();
         $category = Category::all();
@@ -206,14 +189,14 @@ class ProductsController extends Controller
     }
 
 
-    public function SaveAddProduct(Request $request)
+    public function saveAddProduct(Request $request)
     {
         $data = Input::all();
         $product = Product::create($data);
         return redirect('admin/product/product_list')->with('thongbao_add', 'Add Successful'); 
     }
 
-    public function SearchProductAdmin(Request $request)
+    public function searchProductAdmin(Request $request)
     {
         $search = $request->search;
         if (empty($search)){
@@ -227,4 +210,29 @@ class ProductsController extends Controller
         $products = Product::where('name', 'like', '%' .$search. '%')->get();
         return view('PagesAdmin.product.search_product', compact('products', 'search'));
     }
+
+
+ //comment 
+
+
+    public function comment(Request $request)
+    {
+
+         if (Auth::check()) {
+             $data['name'] = Auth::user()->name;
+             $data['product_id'] = $request->id;
+             $data['content'] = $request->content;
+             $comments = Comment::create($data);
+             
+             
+             return back();              
+         }
+         return back()->with('status', 'Đăng nhập mới có thể bình luận.');
+
+    }
+
+    
+
+
+
 }

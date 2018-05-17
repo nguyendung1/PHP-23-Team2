@@ -27,9 +27,8 @@ class CartController extends Controller
        			'qty' => 1,
        			'price' => $product->price,
        			'name' => $product->name,
-       				];
+       	];
         Cart::add($data);   
-        Cart::content();
         return back();	
     }
     public function shoppingCart()
@@ -89,9 +88,5 @@ class CartController extends Controller
         Cart::update($rowId,$data);
         return back();
    }
-
-
-
-    
-
+  
 }

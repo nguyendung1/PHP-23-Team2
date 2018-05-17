@@ -1,11 +1,11 @@
 @extends('layouts.masterAdmin')
 @section('content')
-	    <div id="page-wrapper">
+        <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            List Customer
+                            List User
                         </h1>
                         <div class="form-group">
                             @if (Session::has('success'))
@@ -62,7 +62,7 @@
                                 <td>{{$user->address}}</td>
                                 <td>{{$user->phone_number}}</td>
                                 <td>{{$role}}</td>
-                                <td><a href="url('')">Detail</a></td>
+                                <td class="center"><a href="{{url('admin/user/order_user/' . $user->id)}}">Detail</a></td>
                                 <td class="center"><a href="{{url('admin/user/delete/' . $user->id)}}"><i class="fa fa-trash-o  fa-fw"></i></a></td>
                                 <td class="center"><a href="{{url('admin/user/edit_user/' . $user->id)}}"><i class="fa fa-pencil fa-fw"></i> </a></td>
                             </tr>

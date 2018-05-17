@@ -23,9 +23,9 @@
                     <tr align="center">
                         <th>ID of Order</th>
                         <th>Name</th>
-                        <th>Product ID</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Total</th>
                         <th>Status</th>
                         <th>Order Date</th>
                         <th>Action</th>
@@ -34,20 +34,22 @@
                 <tbody>
                     @foreach($order as $od)
                     <tr class="odd gradeX" align="center">
-                        <td>{{$od->order->id}}</td>
-                        <td>{{$od->order->user->name}}</td>
-                        <td>{{$od->product_id}}</td>
-                        <td>{{$od->quantity}}</td>
-                        <td>{{$od->price}}</td>
+                        <td>{{$od->id}}</td>
+                        <td>{{$od->user->name}}</td>
+                        <td>{{$od->phone_number}}</td>
+                        <td>{{$od->address}}</td>
+                        <td>{{$od->total}}</td>
                         <td>
                             @if($od->status == '1')
                             {{"Complete"}}
-                            @else
+                            @elseif($od->status == '2')
                             {{"Pending"}}
-                            @endif                                                                     
+                            @else
+                            {{"Cancel"}}
+                            @endif                                                                    
                         </td>
-                        <td>{{$od->order->date_order}}</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/order/delete/{{$od->id}}"> Cancel Order</a></td>
+                        <td>{{$od->date_order}}</td>
+                        <td class="center"><a href="admin/order/order_list/{{$od->id}}"> Detail Order</a></td>
                     </tr>
                     @endforeach
                 </tbody>

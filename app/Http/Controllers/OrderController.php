@@ -14,25 +14,22 @@ class OrderController extends Controller
 {
     public function listOrder()
     {
-    	$orders = Order::where('user_id',Auth::user()->id)->get();
-    	return view('PageStore.shoppingCart',compact('orders'));
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+        return view('PageStore.shoppingCart', compact('orders'));
     }
+
     public function status($id,$status)
     {
-    	$order = Order::findOrFail($id);
-    	// echo $status;
-    	if($status == 2){
-    		$data['status'] = 3;
-    	} else {
-    		$data['status'] = 2;
-    	}
-    	$order->update($data);
-    	return back();
+        $order = Order::findOrFail($id);
+        $data['status'] = $status == 2 ? 3 : 2;
+        $order->update($data);
+        return back();
     }
+
     public function detailOrder($id)
     {
-    	$order = Order::findOrFail($id);
-        $order_detail = $order->order_detail;
-    	return view('PageStore.detailOrder',compact('order','order_detail'));
+        $order = Order::findOrFail($id);
+        $orderDetail = $order->orderDetail;
+        return view('PageStore.detailOrder', compact('order','orderDetail'));
     }
 }
