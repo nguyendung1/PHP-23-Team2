@@ -26,19 +26,20 @@ Route::get('viewDetail/{id}', 'ProductsController@viewDetail');
 Route::group(['prefix' => 'admin'], function()
 {
 	Route::group(['prefix' => 'order'], function(){
-		Route::get('/order_list', 'ProductsController@ListOrder');
-		Route::get('/pending_order', 'ProductsController@PendingOrder');
-		Route::post('/search', 'ProductsController@SearchAdmin');
+		Route::get('/order_list', 'ProductsController@listOrder');
+		Route::post('/search', 'ProductsController@searchAdmin');
+		Route::get('/order_list/{id}', 'ProductsController@detailOrder');
 	});	
 	Route::group(['prefix' => 'product'], function(){
-		Route::get('product_list', 'ProductsController@ListProduct');
-		Route::get('product_update/{id}', 'ProductsController@UpdateProduct');
-		Route::post('product_update/{id}', 'ProductsController@SaveUpdateProduct');
-		Route::get('product_add', 'ProductsController@AddProduct');
-		Route::post('product_add', 'ProductsController@SaveAddProduct');
-		Route::post('/search_product', 'ProductsController@SearchProductAdmin');
-		Route::get('/delete/{id}', 'ProductsController@DeleteProduct');
+		Route::get('product_list', 'ProductsController@listProduct');
+		Route::get('product_update/{id}', 'ProductsController@updateProduct');
+		Route::post('product_update/{id}', 'ProductsController@saveUpdateProduct');
+		Route::get('product_add', 'ProductsController@addProduct');
+		Route::post('product_add', 'ProductsController@saveAddProduct');
+		Route::post('/search_product', 'ProductsController@searchProductAdmin');
+		Route::get('/delete/{id}', 'ProductsController@deleteProduct');
 	});
+
 
 
 	Route::group(['prefix' => 'user'], function(){

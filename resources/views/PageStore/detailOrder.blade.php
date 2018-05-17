@@ -20,10 +20,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?PHP
+						<?php
 						 $i = 1; ?>
 
-						@foreach($order_detail as $detail )
+						@foreach($orderDetail as $detail)
 	
 						 <tr>
 						 	<td>{{$i}}</td>

@@ -71,18 +71,7 @@
                         <li>
                             <a href="admin/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fas fa-cart-plus"></i> TheLoai<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="admin/TheLoai/list">List Category</a>
-                                </li>
-                                <li>
-                                    <a href="admin/TheLoai/create">Add Category</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        
 
                         <li>
                                 <a href="#"><i class="fas fa-cart-plus"></i> Order<span class="fa arrow"></span></a>
@@ -106,18 +95,7 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-cube fa-fw"></i>TinTuc<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="admin/TinTuc/list">List Product</a>
-                                </li>
-                                <li>
-                                    <a href="admin/TinTuc/create">Add Product</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        
 
 
 

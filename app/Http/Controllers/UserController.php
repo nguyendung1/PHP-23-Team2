@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Order;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -13,7 +14,7 @@ use DB;
 
 class UserController extends Controller
 {
-	public function getRegister()
+    public function getRegister()
     {
         return view('PageStore.Register');
     }
@@ -35,13 +36,12 @@ class UserController extends Controller
 
     public function postLogin(Request $request)
     {
-      
-        $data['email']=$request->email;
-        $data['password']=$request->password;
+        $data['email'] = $request->email;
+        $data['password'] = $request->password;
         if(Auth::attempt($data)){
             return redirect('/');
         }
-            return back()->with('error','Vui Lòng Nhập Tài Khoản');   
+            return back()->with('error', 'Vui Lòng Nhập Tài Khoản');   
     }
 
     public function logout()
@@ -70,7 +70,7 @@ class UserController extends Controller
     public function getUpdate()
     {
         $user = Auth::user();
-        return view('PageStore.updateUser',compact('user'));
+        return view('PageStore.updateUser', compact('user'));
     }
 
     public function Update(UpdateUserRequest $request)
@@ -80,6 +80,7 @@ class UserController extends Controller
         $user->update($data);
         return back()->with('success', 'Bạn đã thay đổi thông tin thành công');    
     }
+
     //admin
     public function listUser(Request $request){
         $query = User::query();
@@ -95,31 +96,36 @@ class UserController extends Controller
         $users = $query->paginate(4)->appends(request()->query());
         return view('PagesAdmin.users.list_user', compact('users', 'search','date'));
     }
-    //add
+
+    //add User
     public function getUser(){
         return view('PagesAdmin.users.add_user');
     }
+
     public function postUser(RegisterRequest $request)
     {
         $data = $request->all();
-        $data['password']=bcrypt($request->password);
+        $data['password'] = bcrypt($request->password);
         User::create($data);
-        return back()->with('success','Bạn Thêm Thành Công');
-    }
+        return back()->with('success', 'Bạn Thêm Thành Công');
+    } 
+
     public function delete($id)
     {
         $user = User::findOrFail($id);
         if(count($user->orders)>0){
-            return back()->with('success','Không thể xóa');
+            return back()->with('success', 'Không thể xóa');
         }
         $user->delete();
         return back();
     }
+
     public function getEdit($id)
     {   
         $user= User::findOrFail($id);
-        return view('PagesAdmin.users.edit_user',compact('user'));
+        return view('PagesAdmin.users.edit_user', compact('user'));
     }
+
     public function postEdit($id)
     {
         $user = User::findOrFail($id);
@@ -127,5 +133,10 @@ class UserController extends Controller
         $user->update($data);
         return back()->with('edit','Bạn Sửa Thành Công');
     }
-    
+
+    public function orderUser($id)
+    {
+        $orders = Order::where('user_id', $id)->get();
+        return view('PagesAdmin.users.order_user', compact('orders'));
+    }
 }

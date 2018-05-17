@@ -112,21 +112,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				    <li><a href="{{url('shoppingCart')}}"><i style="font-size: 2em;" class="fa fa-shopping-cart"></i>    <span style="color:white;background-color:orange;border-radius:40%; font-size:1.5em;padding:1px 3px;">@if (Cart::content()){{count(Cart::content())}}@else (Trống) @endif </span></a></li>
 					
 					@if(Auth::check())	
-					<li><a href="{{url('')}}">Chào bạn!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
+					<li><a href="{{url('/')}}">Chào!<img src="{{asset('web/images/slide/admin1.png')}}">{{Auth::user()->name}}</a>
 						 <ul>
-			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin Tài Khoản</a></li>
-			  			    <li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
-			  			    <li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
+			  			    <li><a href="{{url('update/{$id}')}}">Thông Tin</a></li>
+			  			    @if(Auth::user()->is_admin==0)
+					  			<li><a href="{{url('admin/home')}}">Quản Trị</a></li>
+					  		@endif
+				  			  	<li><a href="{{url('shopping')}}">Đơn Hàng</a></li>
+					  			<li><a href="{{url('admin/changePass')}}">Đổi Password</a></li>
+					  			<li><a href="{{url('dangxuat')}}">Đăng Xuất</a></li>
 			  			 </ul>  
-			  		</li>	
-
-				
-					
-
-			  			
+			  		</li>
 			  		@else
 					<li><a href="{{url('dangky')}}">Đăng Kí</a></li>
 					<li><a href="{{url('dangnhap')}}">Đăng Nhập</a></li>
+					
 					@endif
 					
 				

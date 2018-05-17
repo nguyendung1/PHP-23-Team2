@@ -94,7 +94,7 @@ class ProductsController extends Controller
             $products = Product::where('price','>', $price1)->where('price', '<', $price2);
            
          }
-         $products = $products->paginate(12);
+         $products = $products->paginate(12)->appends($prices);
          return view('PageStore.search' , compact('products'));
 
      }
@@ -109,42 +109,108 @@ class ProductsController extends Controller
         return view('PageStore.single', compact('product', 'technology', 'category'));
     }
     
-    //Search Order
-    public function list()
+//ADMIN SITE 
+    
+    //Order
+    public function listOrder()
     {
-        $order = Order::all();   
-        $user  = User::all();
-        $value_price = OrderDetail::sum('price');
-        $value_quantity = OrderDetail::sum('quantity');
-        return view('PagesAdmin.orders.list_order', compact('order', 'user', 'value_price', 'value_quantity'));
+        $order = Order::all();          
+        $valueTotal = Order::sum('total');
+        return view('PagesAdmin.orders.list_order', compact('order', 'valueTotal'));       
     }
 
-
-    public function pending_order()
+    public function detailOrder($id)
     {
-        $order = OrderDetail::where('status', 0)->get();
-        return view('PagesAdmin.orders.pending_order', compact('order'));     
+        $order = Order::findOrFail($id);       
+        return view('PagesAdmin.orders.detail_order', compact('order'));
     }
 
-
-    public function search_admin(Request $request)
+    public function searchAdmin(Request $request)
     {
         $search = $request->search;
         $user = User::where('name', '=', $search)->first();
-        if(isset($user)){   
+        if (isset($user)){   
             $order = $user->Orders()->get();
             return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));
+        }
+        if ($search == 'Pending' or $search == 'pending'){
+            $order = Order::where('status', 2)->get();          
+            return view('PagesAdmin.orders.pending_order', compact('order'));            
+        }       
+        if (empty($search)){
+            return view('PagesAdmin.orders.not_found');     
         }
         $order = Order::where('id', 'like', $search)->orWhere('date_order', 'like', '%' .$search. '%')->get();
         return view('PagesAdmin.orders.search_order', compact('search', 'order', 'user'));   
     }
 
-    public function delete($id)
+    public function deleteOrder($id)
     {
         $order = Order::findorfail($id);
         $order->delete();
         return redirect('admin/order/order_list')->with('thongbao_delete', 'Delete Successful');
     } 
+
+    //Product
+    public function listProduct()
+    {
+        $products = Product::all();                    
+        return view('PagesAdmin.product.list_product', compact('products'));
+    }  
+
+    public function updateProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $category = Category::all();
+        return view('PagesAdmin.product.update_product', compact('product', 'category'));
+    }
+
+
+    public function saveUpdateProduct($id)
+    {
+        $product = Product::findOrFail($id); 
+        $data = Input::get();
+        $product->update($data);
+        return redirect('admin/product/product_list')->with('thongbao_update','Update Successful');
+    }
+
+    public function deleteProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect('admin/product/product_list')->with('thongbao_delete', 'Delete Successful');
+    }     
+    
+    public function addProduct()
+    {
+        $product = Product::all();
+        $category = Category::all();
+        return view('PagesAdmin.product.add_product', compact('product', 'category'));
+    }
+
+
+    public function saveAddProduct(Request $request)
+    {
+        $data = Input::all();
+        $product = Product::create($data);
+        return redirect('admin/product/product_list')->with('thongbao_add', 'Add Successful'); 
+    }
+
+    public function searchProductAdmin(Request $request)
+    {
+        $search = $request->search;
+        if (empty($search)){
+            return view('PagesAdmin.orders.not_found');     
+        }
+        $category = Category::where('name', 'like', '%' .$search. '%')->first();
+        if (isset($category)){   
+            $products = $category->products()->get();          
+            return view('PagesAdmin.product.search_product', compact('search', 'products', 'category'));
+        }
+        $products = Product::where('name', 'like', '%' .$search. '%')->get();
+        return view('PagesAdmin.product.search_product', compact('products', 'search'));
+    }
+
 
  //comment 
 

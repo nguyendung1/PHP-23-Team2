@@ -29,7 +29,6 @@ class CartController extends Controller
        			'name' => $product->name,
        	];
         Cart::add($data);   
-        
         return back();	
     }
     public function shoppingCart()
@@ -89,9 +88,5 @@ class CartController extends Controller
         Cart::update($rowId,$data);
         return back();
    }
-
-
-
-    
-
+  
 }
