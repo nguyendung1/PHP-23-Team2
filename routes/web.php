@@ -18,7 +18,7 @@ Route::get('store/{id}', 'ProductsController@store');
 Route::get('search', 'ProductsController@searchProduct');
 
 //tim tren gia tien
-Route::get('searchFollowPrice/{price1}/{price2}', 'ProductsController@searchFollowPrice');
+Route::get('searchFollowPrice', 'ProductsController@searchFollowPrice');
 //view detail
 Route::get('viewDetail/{id}', 'ProductsController@viewDetail');
 
